@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="FormInputField_Width">330dp</dimen>
+    <dimen name="FormInputField_Height">48dp</dimen>
+    <dimen name="Login_fontSize">22sp</dimen>
+    <dimen name="Reset_pass">16sp</dimen>
+    <dimen name="Rest_font">16sp</dimen>
+    <dimen name="heading">40sp</dimen>
+    <dimen name="reg_btn_size">18sp</dimen>
+    <dimen name="login_btn">250dp</dimen>
+    <dimen name="register_btn">250dp</dimen>
+    <dimen name="dashboard_padding">5dp</dimen>
+    <dimen name="dashboard_width">80dp</dimen>
+    <dimen name="dashboard_height">80dp</dimen>
+    <dimen name="welcome">27sp</dimen>
+    <dimen name="bio_padding">10dp</dimen>
+    <dimen name="bio_edit_padding">15dp</dimen>
+    <dimen name="edit_btn">110dp</dimen>
+    <dimen name="cancelBtn">260dp</dimen>
+    <dimen name="textFieldHeight">216dp</dimen>
+    <dimen name="layoutMargine">20dp</dimen>
+    <dimen name="notification_txt">20sp</dimen>
+    <dimen name="notiesWidth">300dp</dimen>
+    <dimen name="notiesMargine">25dp</dimen>
+    <dimen name="logoWidth">200dp</dimen>
+    <dimen name="logoHeight">110dp</dimen>
+</resources>

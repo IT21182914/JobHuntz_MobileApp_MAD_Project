@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".ChangePassword">
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/changePassword"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/regUserPassword"
+        android:layout_width="@dimen/FormInputField_Width"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="70dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_field"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="@string/Enter_previous_pass"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/new_pass"
+        android:layout_width="@dimen/FormInputField_Width"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="30dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_field"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="@string/new_pass"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regUserPassword" />
+
+    <EditText
+        android:id="@+id/regUserRePassword"
+        android:layout_width="@dimen/FormInputField_Width"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="30dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_field"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="@string/retype_new_pass"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_pass" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="@dimen/cancelBtn"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/custom_field"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/reg_btn_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regUserRePassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button6"
+        android:layout_width="@dimen/cancelBtn"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btndelete"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/reg_btn_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

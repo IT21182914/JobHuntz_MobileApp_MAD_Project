@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Login_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/background1"
+    tools:context="MainActivity"
+    tools:layout_editor_absoluteX="14dp"
+    tools:layout_editor_absoluteY="125dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="359dp"
+        android:layout_height="632dp"
+
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_field"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="24dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48000002">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/logoWidth"
+            android:layout_height="@dimen/logoHeight"
+            android:layout_gravity="start"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/jobhuntz" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="@dimen/FormInputField_Width"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="150dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_field"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
+
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="@dimen/FormInputField_Width"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_field"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:passwordToggleEnabled = "true"
+        />
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="@dimen/login_btn"
+        android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginTop="20dp"
+        android:text="@string/Login_btn"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/reset_pass" />
+
+    <TextView
+        android:id="@+id/registrationlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/New_to_this"
+        android:textColor="@color/purple_500"
+        android:textSize="@dimen/Rest_font"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/Sign_in"
+        android:textAlignment="center"
+        android:textSize="@dimen/Rest_font"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/registrationlink" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="248dp"
+        android:layout_height="57dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/google_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/Sign_in_btns"
+            android:src="@drawable/google" />
+
+        <ImageView
+            android:id="@+id/facebook_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/Sign_in_btns"
+            android:src="@drawable/facebook"
+            tools:ignore="ImageContrastCheck" />
+
+        <ImageView
+            android:id="@+id/twitter_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/Sign_in_btns"
+            android:src="@drawable/twitter"
+            tools:ignore="ImageContrastCheck" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/reset_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:linksClickable="true"
+        android:text="@string/Pass_reset"
+        android:textAllCaps="false"
+        android:textColor="@color/purple_500"
+        android:textSize="@dimen/Reset_pass"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
