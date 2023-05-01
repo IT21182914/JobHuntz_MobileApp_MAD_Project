@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:addStatesFromChildren="false"
     android:background="@drawable/background1"
-    tools:context=".UserRegistration">
+    tools:context=".activities.UserRegistration">
 
 
     <EditText
-        android:id="@+id/regUserName"
+        android:id="@+id/userRegName"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="32dp"
@@ -61,11 +61,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserPhone"
+        app:layout_constraintTop_toBottomOf="@+id/userRegPhone"
         app:passwordToggleEnabled="true" />
 
     <EditText
-        android:id="@+id/regUserPhone"
+        android:id="@+id/userRegPhone"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="24dp"
@@ -79,10 +79,10 @@
         android:inputType="phone|number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/userRegMail" />
 
     <EditText
-        android:id="@+id/regUserEmail"
+        android:id="@+id/userRegMail"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="24dp"
@@ -96,7 +96,7 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/userRegName" />
 
     <Button
         android:id="@+id/regBtn"

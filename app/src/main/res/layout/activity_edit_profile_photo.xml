@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1"
-    tools:context=".ChangeProfilePhoto">
+    tools:context=".activities.ChangeProfilePhoto">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/edtProfile"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="@dimen/edit_btn"
         android:layout_height="@dimen/FormInputField_Height"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_image2" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/saveBtn"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="50dp"
@@ -49,10 +49,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button10" />
+        app:layout_constraintTop_toBottomOf="@+id/edtProfile" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button8"
+        android:id="@+id/cancelChangesBtn"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="40dp"
@@ -63,6 +63,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button9" />
+        app:layout_constraintTop_toBottomOf="@+id/saveBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

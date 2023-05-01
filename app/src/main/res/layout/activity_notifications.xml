@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1"
-    tools:context=".Notifications">
+    tools:context=".activities.Notifications">
+
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:text="@string/notifications"
         android:textColor="@color/black"
         android:textSize="@dimen/heading"
@@ -20,144 +21,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotification"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="70dp"
-        android:padding="@dimen/bio_edit_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:layout_constraintVertical_bias="1.0">
+        tools:listitem="@layout/activity_notification_bar" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvLoadingData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/notiesMargine"
-                android:gravity="center"
-                android:orientation="horizontal">
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/custom_field"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="@dimen/reg_btn_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/noties"
-                    android:layout_width="@dimen/notiesWidth"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_marginEnd="@dimen/bio_edit_padding"
 
-                    android:padding="@dimen/dashboard_padding"
-                    android:text="@string/sampleNote"
-
-                    android:textSize="@dimen/Rest_font"
-                    tools:ignore="TextSizeCheck" />
-
-                <ImageButton
-                    android:id="@+id/ImageBtn"
-                    android:layout_width="@dimen/FormInputField_Height"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#FFFFFF"
-                    android:contentDescription="@string/no_desc"
-                    android:minHeight="48dp"
-                    app:srcCompat="@drawable/baseline_delete_24" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/notiesMargine"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/noties3"
-                    android:layout_width="@dimen/notiesWidth"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_marginEnd="@dimen/bio_edit_padding"
-
-                    android:padding="@dimen/dashboard_padding"
-                    android:text="@string/sampleNote"
-                    android:textSize="@dimen/Rest_font"
-                    tools:ignore="TextSizeCheck,TextSizeCheck" />
-
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="@dimen/FormInputField_Height"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#FFFFFF"
-                    android:contentDescription="@string/Edit"
-                    android:minHeight="48dp"
-                    app:srcCompat="@drawable/baseline_delete_24" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/notiesMargine"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/noties4"
-                    android:layout_width="@dimen/notiesWidth"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_marginEnd="@dimen/bio_edit_padding"
-
-                    android:padding="@dimen/dashboard_padding"
-                    android:text="@string/sampleNote"
-                    android:textSize="@dimen/Rest_font"
-                    tools:ignore="TextSizeCheck" />
-
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="@dimen/FormInputField_Height"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#FFFFFF"
-                    android:contentDescription="@string/Register_btn"
-                    android:minHeight="48dp"
-                    app:srcCompat="@drawable/baseline_delete_24" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/notiesMargine"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/noties5"
-                    android:layout_width="@dimen/notiesWidth"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_marginEnd="@dimen/bio_edit_padding"
-
-                    android:padding="@dimen/dashboard_padding"
-                    android:text="@string/sampleNote"
-                    android:textSize="@dimen/Rest_font"
-                    tools:ignore="TextSizeCheck" />
-
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="@dimen/FormInputField_Height"
-                    android:layout_height="@dimen/FormInputField_Height"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#FFFFFF"
-                    android:contentDescription="@string/Remove"
-                    android:minHeight="48dp"
-                    app:srcCompat="@drawable/baseline_delete_24" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+

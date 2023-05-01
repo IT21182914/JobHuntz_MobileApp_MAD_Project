@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1"
-    tools:context=".EditProfileDetails"
+    tools:context=".activities.EditProfileDetails"
     tools:layout_editor_absoluteX="15dp"
     tools:layout_editor_absoluteY="302dp">
 
@@ -13,11 +13,11 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="@string/editDetails"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/heading"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -25,10 +25,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/regUserName"
+        android:id="@+id/userEditName"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:autofillHints=""
         android:background="@drawable/custom_field"
         android:drawableStart="@drawable/baseline_person_24"
@@ -42,10 +42,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
-        android:id="@+id/regUserPhone"
+        android:id="@+id/userEditPhone"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/custom_field"
         android:drawableStart="@drawable/baseline_local_phone_24"
@@ -56,13 +58,15 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/userEditName" />
 
     <EditText
-        android:id="@+id/regUserEmail"
+        android:id="@+id/userEditMail"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints="no Auto fill"
         android:background="@drawable/custom_field"
         android:drawableStart="@drawable/baseline_email_24"
@@ -73,13 +77,15 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/userEditPhone" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/userEdtBio"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/textFieldHeight"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/custom_field"
         android:ems="10"
@@ -92,11 +98,11 @@
         android:textSize="@dimen/reg_btn_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/userEditMail"
         tools:ignore="TextSizeCheck" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/updateBtn"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="32dp"
@@ -108,10 +114,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/userEdtBio" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button5"
+        android:id="@+id/cancelChanges"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="20dp"
@@ -122,7 +128,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/updateBtn"
         tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

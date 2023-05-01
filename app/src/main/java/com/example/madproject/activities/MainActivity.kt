@@ -1,15 +1,19 @@
-package com.example.madproject
+package com.example.madproject.activities
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.madproject.R
 import com.example.madproject.databinding.ActivityMainBinding
 import com.example.madproject.models.UserModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -31,16 +35,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var binding : ActivityMainBinding
 
-    //data holdings
-
+    //data holdings for login view
     private lateinit var userEmail :EditText
     private lateinit var password :EditText
     private lateinit var submitBtn :Button
 
     //database reference
-
     private lateinit var dbRef : DatabaseReference
 
+    //id
+    private lateinit var userIDs :String
+
+    //dialog
+    private lateinit var diaog :Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
-        //configure google sign in
 
+        //configure google sign in
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("92401905438-ls9vedrdnei1kakq3t58gs4jlhinevk2.apps.googleusercontent.com")
             .requestEmail()
@@ -58,20 +65,36 @@ class MainActivity : AppCompatActivity() {
 
         gsc = GoogleSignIn.getClient(this , gso)
         registerBtn = findViewById(R.id.registrationlink)
+
+        //finding google icon
         googleBtn = findViewById(R.id.google_btn)
 
+        //finding login form components
         userEmail = findViewById(R.id.email)
         password = findViewById(R.id.password)
         submitBtn = findViewById(R.id.submit_btn)
 
-
+        //add onclick listener to submit button
         submitBtn.setOnClickListener{
-            validateData()
+            showProgress()
+            if(userEmail.text.isEmpty()){
+                userEmail.error = "Email must be entered"
+                hideProgress()
+            }
+            if(password.text.isEmpty()){
+                password.error = "Password must be entered"
+                hideProgress()
+            }
+            if (!(userEmail.text.isEmpty()  && password.text.isEmpty())){
+                //if both email and password is not empty validate those details
+                validateData()
+            }
         }
 
 
         binding.googleBtn.setOnClickListener{
             println("Sign in button clicked")
+            showProgress()
             signIn()
         }
         registerBtn.setOnClickListener{
@@ -84,17 +107,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun signIn() {
         val signInIntent = gsc.signInIntent
-
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+/* validate function for login */
     private fun validateData() {
+
         dbRef = FirebaseDatabase.getInstance().getReference("data")
 
-        val userEmailadd = userEmail.text.toString()
-        val userpass = password.text.toString()
+        val userEmailAdd = userEmail.text.toString()
+        val userPass = password.text.toString()
+        var emailCount = 0
+        var foundUser : UserModel? = null
 
         dbRef.addValueEventListener(object  : ValueEventListener{
+
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 if(snapshot.exists()){
@@ -104,37 +131,62 @@ class MainActivity : AppCompatActivity() {
                         val userData = userSnap.getValue(UserModel::class.java)
 
                         if (userData != null) {
-                            Log.d("TAG", "email: ${userData.email}\nusername: ${userData.name}")
+
+                            if(userEmailAdd == userData.email.toString()){
+                                emailCount += 1
+                                foundUser = userData
+
+                            }
+
                         }
+                    }
+                    if(emailCount > 0){
 
-                        if (userData != null) {
-                            if(userEmailadd == userData.email){
-                                userEmail.error = null
+                        if(userEmailAdd == foundUser?.email.toString()){
 
-                                if (userpass == userData.password){
-                                    password.error = null
+                            userEmail.error = null
 
-                                    Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(applicationContext, Dashboard::class.java)
+                            if (userPass == foundUser?.password.toString()){
 
-                                    intent.putExtra(EXTRA_NAME, userData.name)
-                                    USER_ID = userData.userId.toString()
+                                password.error = null
 
-                                    Log.d("TAG", "User id is : $USER_ID ")
+                                Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(applicationContext, Dashboard::class.java)
 
-                                    startActivity(intent)
+                                intent.putExtra(EXTRA_NAME, foundUser?.name)
+                                USER_ID = foundUser?.userId.toString()
+                                intent.putExtra(UID, USER_ID)
+                                intent.putExtra(METHOD, 1002)
 
-                                }else{
-                                    password.error = "Password is incorrect"
+                                userIDs = USER_ID
+
+                                val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+                                // Save user's session data
+                                sharedPreferences.edit().apply {
+                                    putString("userId", userIDs)
+                                    putString("userName", foundUser?.name)
+                                    putBoolean("isLoggedIn", true)
+                                    apply()
                                 }
+                                //hidingProgressbar
+                                hideProgress()
+                                startActivity(intent)
+
                             }else{
-                                userEmail.error = "This email address is not registered"
+                                //hidingProgressbar
+                                hideProgress()
+                                password.error = "Password is incorrect"
                             }
                         }
 
-                        Log.d(TAG, "loadUserData()details $userData")
-
+                    }else{
+                        userEmail.error = "This email address is not registere"
+                        //hidingProgressbar
+                        hideProgress()
                     }
+
+                    Log.d(TAG, "loadUserData()details $foundUser")
                 }
             }
 
@@ -143,17 +195,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-        val email = userEmail.text.toString()
-        val pass = password.text.toString()
-
-        if (email.isEmpty()) {
-            userEmail.error = "Please enter email"
-        }
-        if (pass.isEmpty()) {
-            password.error = "Please enter password"
-        }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -174,6 +215,8 @@ class MainActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
+                //hidingProgressbar
+                hideProgress()
             }
         }
     }
@@ -194,6 +237,8 @@ class MainActivity : AppCompatActivity() {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     updateUI(null)
+                    //hidingProgressbar
+                    hideProgress()
                 }
             }
     }
@@ -202,18 +247,35 @@ class MainActivity : AppCompatActivity() {
         if (user != null) {
             Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
             val intent = Intent(applicationContext, Dashboard::class.java)
+            USID = user.uid
             intent.putExtra(EXTRA_NAME, user.displayName)
-            intent.putExtra(EXTRA_NAME, user.displayName)
-            intent.putExtra(EXTRA_NAME, user.displayName)
+            intent.putExtra(METHOD, RC_SIGN_IN)
+            intent.putExtra(USER_ID, user.uid)
+            intent.putExtra(USER_PHOTO, user.photoUrl)
+            //hidingProgressbar
+            hideProgress()
             startActivity(intent)
         }
     }
 
-
+    private fun showProgress(){
+        diaog = Dialog(this@MainActivity)
+        diaog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        diaog.setContentView(R.layout.dialog_wait)
+        diaog.setCanceledOnTouchOutside(false)
+        diaog.show()
+    }
+    private fun hideProgress(){
+        diaog.dismiss()
+    }
 
     companion object{
         const val RC_SIGN_IN = 1001
         var EXTRA_NAME = "EXTRA_NAME"
         var USER_ID = "USER_ID"
+        var USER_PHOTO = "USER_PHOTO"
+        var METHOD = "METHOD"
+        var USID = "UIDS"
+        const val UID = "UID"
     }
 }

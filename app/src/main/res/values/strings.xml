@@ -48,4 +48,6 @@
     <string name="Remove">Remove</string>
     <string name="sampleNote">Your request was recived to admin</string>
     <string name="logo">Logo</string>
+    <string name="loading">Loading ...</string>
+    <string name="back">Back</string>
 </resources>

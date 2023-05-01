@@ -1,10 +1,11 @@
-package com.example.madproject
+package com.example.madproject.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.madproject.R
 import com.example.madproject.models.UserModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -24,9 +25,9 @@ class UserRegistration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_registration)
 
-        name = findViewById(R.id.regUserName)
-        email = findViewById(R.id.regUserEmail)
-        phone = findViewById(R.id.regUserPhone)
+        name = findViewById(R.id.userRegName)
+        email = findViewById(R.id.userRegMail)
+        phone = findViewById(R.id.userRegPhone)
         password = findViewById(R.id.regUserPassword)
         rePassword = findViewById(R.id.regUserRePassword)
         regBtn = findViewById(R.id.regBtn)
@@ -92,7 +93,7 @@ class UserRegistration : AppCompatActivity() {
                    Toast.makeText(this, "Error${err.message} ", Toast.LENGTH_LONG).show()
                }
        }else{
-           Toast.makeText(this, "Form filled with errors", Toast.LENGTH_SHORT)
+           Toast.makeText(this, "Form filled with errors", Toast.LENGTH_SHORT).show()
        }
 
     }

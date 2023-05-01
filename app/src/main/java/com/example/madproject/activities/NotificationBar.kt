@@ -1,11 +1,12 @@
-package com.example.madproject
+package com.example.madproject.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.madproject.R
 
-class ChangeProfilePhoto : AppCompatActivity() {
+class NotificationBar : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile_photo)
+        setContentView(R.layout.activity_notification_bar)
     }
 }
