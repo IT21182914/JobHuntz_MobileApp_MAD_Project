@@ -24,4 +24,30 @@
     <dimen name="notiesMargine">25dp</dimen>
     <dimen name="logoWidth">200dp</dimen>
     <dimen name="logoHeight">110dp</dimen>
+
+
+
+    <dimen name="JobListWidth">200dp</dimen>
+    <dimen name="JobListingsWidth">200dp</dimen>
+    <dimen name="UIJobWidth">200dp</dimen>
+    <dimen name="SEJobWidth">200dp</dimen>
+    <dimen name="SEJobHieght">730dp</dimen>
+    <dimen name="JobListingHeight">750dp</dimen>
+    <dimen name="JobListHeight">730dp</dimen>
+    <dimen name="JobUIHeight">730dp</dimen>
+    <dimen name="setopicheight">40sp</dimen>
+    <dimen name="sesalheight">40dp</dimen>
+    <dimen name="sedes">70dp</dimen>
+    <dimen name="descriptionSE2">70dp</dimen>
+    <dimen name="joblistheight">50sp</dimen>
+    <dimen name="se">30dp</dimen>
+    <dimen name="ui">30dp</dimen>
+    <dimen name="hr">30dp</dimen>
+    <dimen name="web">30dp</dimen>
+    <dimen name="jobname">50dp</dimen>
+    <dimen name="jobsal">50dp</dimen>
+    <dimen name="jobdes">50dp</dimen>
+    <dimen name="jobbenefits">50dp</dimen>
+    <dimen name="jobcompany">50dp</dimen>
+    <dimen name="btnlist">50dp</dimen>
 </resources>

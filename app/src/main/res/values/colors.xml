@@ -23,4 +23,10 @@
     <color name="fuchsia">#FF00FF</color>
     <color name="magenta">#FF00FF</color>
     <color name="red">#FF0000</color>
+
+
+
+    <color name="update_color">#3471eb</color>
+    <color name="delete_color">#EF1150</color>
+    <color name="divider_grey">#CCCCCC</color>
 </resources>
