@@ -41,6 +41,16 @@
             android:name=".activities.UserRegistration"
             android:exported="false" />
         <activity
+            android:name=".activities.FetchingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.JobListForm"
+            android:exported="false" />
+
+        <activity
+            android:name=".activities.ViewListingMain"
+            android:exported="false"/>
+        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
