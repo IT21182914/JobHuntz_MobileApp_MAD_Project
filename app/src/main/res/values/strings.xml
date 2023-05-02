@@ -50,4 +50,57 @@
     <string name="logo">Logo</string>
     <string name="loading">Loading ...</string>
     <string name="back">Back</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="JobName">Job Name</string>
+    <string name="JobDescription">Job Description</string>
+    <string name="Benefit">Benefits</string>
+    <string name="Company">Company Info</string>
+    <string name="name">Job Name</string>
+    <string name="description">Description</string>
+    <string name="benefit">Benefits</string>
+    <string name="info">Company Info</string>
+    <string name="required">Required</string>
+    <string name="benefits">Benefits</string>
+    <string name="JobSalary">Salary</string>
+    <string name="Salary">Job Salary</string>
+    <string name="Software">Software Engineer</string>
+    <string name="SESalary">$25 per hour</string>
+    <string name="jobdes">Description</string>
+    <string name="Job">Job Description</string>
+    <string name="Companyinfo">Company Info</string>
+    <string name="sedes">A minimum of 6 months to 1 year of hands-on industry experience is required. Solid experience with PHP,React js and Flutter is a strong advantage.</string>
+    <string name="sedes2">"A degree or equivalent qualification in information technology. "</string>
+    <string name="btnseupdate">Update</string>
+    <string name="btnsedelete">Delete</string>
+    <string name="Joblisting">Job Listings</string>
+    <string name="se">Software Engineer</string>
+    <string name="ui">UI/UX Designer</string>
+    <string name="hr">HR Manager</string>
+    <string name="webdev">Web Developer</string>
+    <string name="uiux">UI/UX Designer</string>
+    <string name="uiuxsalary">$15 per hour</string>
+    <string name="uides">Job Description</string>
+    <string name="uibenefit">Benefits</string>
+    <string name="uicompany">Company Info</string>
+    <string name="uidescription">A minimum of 6 months to 1 year of hands-on industry experience is required. Solid experience with Figma  is a strong advantage.</string>
+    <string name="uidescription2">"A degree or equivalent qualification in information technology. "</string>
+    <string name="uiuxtopic">UI/UX Designer</string>
+    <string name="uisal">$15 per hour</string>
+    <string name="uijobdes">Job Description</string>
+    <string name="uibenefits">Benefits</string>
+    <string name="search_hint">Search Jobs</string>
 </resources>
