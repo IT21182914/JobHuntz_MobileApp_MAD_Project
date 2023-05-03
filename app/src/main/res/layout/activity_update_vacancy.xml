@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".activities.UpdateVacancy">
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/Update"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/Heading"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cmpName"
+        android:layout_width="@dimen/textWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textAlignment="textStart"
+        android:textColor="#221F1F"
+        android:textSize="@dimen/Text22"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="TextSizeCheck"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/descTag"
+        android:layout_width="@dimen/textWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAlignment="textStart"
+        android:textColor="#221F1F"
+        android:textSize="@dimen/Text22"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleName"
+        tools:ignore="TextSizeCheck"
+        tools:text="Description" />
+
+    <EditText
+        android:id="@+id/titleName"
+        android:layout_width="@dimen/formWidth"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:background="@drawable/description_back"
+        android:ems="10"
+        android:hint="position"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_txt"
+        android:text="@string/account_assist"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cmpName"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/descBox"
+        android:layout_width="@dimen/formWidth"
+        android:layout_height="@dimen/curnt_hight"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/description_back"
+        android:padding="15dp"
+        android:text=""
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:lines="12"
+        android:maxLines="12"
+        android:scrollbars="vertical"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descTag"
+        android:autofillHints="" />
+
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/update"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="@+id/descBox"
+        app:layout_constraintTop_toBottomOf="@+id/descBox"
+        tools:ignore="VisualLintBounds" />
+
+    <Button
+        android:id="@+id/cancelRBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#EF1150"
+        android:text="@android:string/cancel"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toStartOf="@+id/updateBtn"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="@+id/descBox"
+        app:layout_constraintTop_toBottomOf="@+id/descBox"
+        tools:ignore="VisualLintBounds" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

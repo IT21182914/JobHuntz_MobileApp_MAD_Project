@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADProject"
         tools:targetApi="31">
+
+<!--NAVEEN-->
         <activity
             android:name=".activities.NotificationBar"
             android:exported="false" />
@@ -40,16 +42,60 @@
         <activity
             android:name=".activities.UserRegistration"
             android:exported="false" />
+
+<!--RASANGI-->
+        <activity
+            android:name=".activities.CurrentListItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DeletePost"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UpdateVacancy"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PostVC"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CurrentVc"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PostJob"
+            android:exported="false"  />
+
+<!--DILAN-->
         <activity
             android:name=".activities.FetchingActivity"
             android:exported="false" />
         <activity
             android:name=".activities.JobListForm"
             android:exported="false" />
-
         <activity
             android:name=".activities.ViewListingMain"
             android:exported="false"/>
+        <activity
+            android:name=".activities.ListingDetailsActivity"
+            android:exported="false"/>
+
+<!--AMANDA-->
+
+        <activity
+            android:name=".activities.CategoryItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreateCategories"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UpdateCategory"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DeleteCategory"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CategoryMain"
+            android:exported="false"/>
+
+
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">

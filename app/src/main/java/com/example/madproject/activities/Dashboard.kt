@@ -22,7 +22,7 @@ class Dashboard : AppCompatActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
 
-
+//hello
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +33,14 @@ class Dashboard : AppCompatActivity() {
 
         binding.profileImage.setOnClickListener{
             val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
+            startActivity(intent)
+        }
+        binding.findJob.setOnClickListener{
+            val intent = Intent(applicationContext, ViewListingMain::class.java)
+            startActivity(intent)
+        }
+        binding.postJobs.setOnClickListener{
+            val intent = Intent(applicationContext, PostJob::class.java)
             startActivity(intent)
         }
 
@@ -100,18 +108,7 @@ class Dashboard : AppCompatActivity() {
                                     startActivity(intent)
                                 }
 
-                                binding.findJob.setOnClickListener{
 
-                                    val intent = Intent(applicationContext, ViewListingMain::class.java)
-                                    intent.putExtra("NAME", name)
-
-                                    intent.putExtra("BIO", bio)
-                                    intent.putExtra("ID", userId)
-                                    intent.putExtra("REFID",refId)
-
-                                    intent.putExtra("USER", "GOOGLE_USER")
-                                    startActivity(intent)
-                                }
 
                             } else {
                                 binding.TextName.text = intent.getStringExtra(EXTRA_NAME)
