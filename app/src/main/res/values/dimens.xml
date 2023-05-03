@@ -27,6 +27,17 @@
 
 
 
+    <dimen name="delete_width">100dp</dimen>
+    <dimen name="delete_height">70dp</dimen>
+    <dimen name="add_width">25</dimen>
+    <dimen name="add_height">70dp</dimen>
+    <dimen name="add_width_">60dp</dimen>
+    <dimen name="cancel_width">100dp</dimen>
+    <dimen name="cancel_height">70dp</dimen>
+    <dimen name="create_width">100dp</dimen>
+    <dimen name="create_height">70dp</dimen>
+    <dimen name="normal">20sp</dimen>
+
 
     <dimen name="curnt_vc">276dp</dimen>
     <dimen name="post_vc">73dp</dimen>
