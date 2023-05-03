@@ -44,7 +44,24 @@
             android:exported="false" />
 
 <!--RASANGI-->
-
+        <activity
+            android:name=".activities.CurrentListItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DeletePost"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UpdateVacancy"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PostVC"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CurrentVc"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PostJob"
+            android:exported="false"  />
 
 <!--DILAN-->
         <activity
