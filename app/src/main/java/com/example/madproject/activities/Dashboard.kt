@@ -39,6 +39,10 @@ class Dashboard : AppCompatActivity() {
             val intent = Intent(applicationContext, ViewListingMain::class.java)
             startActivity(intent)
         }
+        binding.postJobs.setOnClickListener{
+            val intent = Intent(applicationContext, PostJob::class.java)
+            startActivity(intent)
+        }
 
         if (intent.getIntExtra(METHOD,0) == 1001){
 
