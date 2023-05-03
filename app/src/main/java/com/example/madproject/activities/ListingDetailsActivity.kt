@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ListingDetailsActivity : AppCompatActivity() {
 
-
+//initialize
     private lateinit var tvListId: TextView
     private lateinit var tvJobName: TextView
     private lateinit var tvJobSalary: TextView
@@ -34,10 +34,12 @@ class ListingDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing_details)
 
+
+        //method calling
         initView()
         setValuesToViews()
 
-
+        //Update Button
         btnUpdate.setOnClickListener {
             Log.d("TAG","ID ${intent.getStringExtra("ListId").toString()}")
             openUpdateDialog(
@@ -46,6 +48,8 @@ class ListingDetailsActivity : AppCompatActivity() {
             )
         }
 
+
+        //Delete Button
         btnDelete.setOnClickListener {
             deleteRecord(
                 intent.getStringExtra("ListId").toString()
@@ -69,7 +73,6 @@ class ListingDetailsActivity : AppCompatActivity() {
         btnDelete = findViewById(R.id.btnDeleteL2)
 
 
-
     }
     private fun setValuesToViews(){
 
@@ -79,9 +82,6 @@ class ListingDetailsActivity : AppCompatActivity() {
         tvJobDes.text = intent.getStringExtra("JobDescription")
         tvBenefitJob.text = intent.getStringExtra("Benefits")
         tvCompanyInfo.text = intent.getStringExtra("CompanyInfo")
-
-
-
 
 
     }
@@ -138,6 +138,9 @@ class ListingDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+
+    //Update Job Listing
     private fun updateListingData(
         id: String,
         name: String,
@@ -153,6 +156,8 @@ class ListingDetailsActivity : AppCompatActivity() {
     }
 
 
+
+    //Delete Job Listing
     private fun deleteRecord(
         id: String
     ){
