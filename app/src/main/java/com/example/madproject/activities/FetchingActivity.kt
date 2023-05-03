@@ -13,7 +13,10 @@ import com.example.madproject.models.ListModel
 import com.google.firebase.database.*
 import com.example.madproject.R
 
-class FetchingActivity : AppCompatActivity() {
+    class FetchingActivity : AppCompatActivity() {
+
+
+    //initialize
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
@@ -23,6 +26,7 @@ class FetchingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetching)
 
+
         listRecyclerView = findViewById(R.id.rvList)
         listRecyclerView.layoutManager = LinearLayoutManager(this)
         listRecyclerView.setHasFixedSize(true)
@@ -30,6 +34,8 @@ class FetchingActivity : AppCompatActivity() {
 
         listingList = arrayListOf<ListModel>()
 
+
+        //calling getListingData method
         getListingsData()
 
     }
