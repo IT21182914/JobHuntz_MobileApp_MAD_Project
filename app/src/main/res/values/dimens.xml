@@ -27,6 +27,32 @@
 
 
 
+
+    <dimen name="curnt_vc">276dp</dimen>
+    <dimen name="post_vc">73dp</dimen>
+    <dimen name="curnthi_Vc">73dp</dimen>
+    <dimen name="protxt_width">351dp</dimen>
+    <dimen name="protxt_hight">76dp</dimen>
+    <dimen name="curnt_width">343dp</dimen>
+    <dimen name="curnt_hight">123dp</dimen>
+    <dimen name="logo_w">63dp</dimen>
+    <dimen name="logo_h">72dp</dimen>
+    <dimen name="textWidth">321dp</dimen>
+    <dimen name="txt_hight">42dp</dimen>
+    <dimen name="Profiletxt">18sp</dimen>
+    <dimen name="btnTxt">20sp</dimen>
+    <dimen name="TItle">30sp</dimen>
+    <dimen name="Text22">22sp</dimen>
+    <dimen name="formWidth">323dp</dimen>
+    <dimen name="fieldHeight">53dp</dimen>
+    <dimen name="visibleField">48dp</dimen>
+    <dimen name="padding_txt">10dp</dimen>
+    <dimen name="profileDp">347dp</dimen>
+    <dimen name="profileDPH">324dp</dimen>
+    <dimen name="Heading">32sp</dimen>
+
+
+
     <dimen name="JobListWidth">200dp</dimen>
     <dimen name="JobListingsWidth">200dp</dimen>
     <dimen name="UIJobWidth">200dp</dimen>

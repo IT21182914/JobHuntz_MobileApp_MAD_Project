@@ -53,6 +53,36 @@
 
 
 
+    <string name="profileName">NAVEEN MALSHAN \n HR MANAGER\n  Got International (pvt) Ltd </string>
+    <string name="noDesc">no description</string>
+    <string name="btnCurrent">Current Vacancies</string>
+    <string name="btnPost">Post Vacancies</string>
+    <string name="ans">Answer</string>
+    <string name="post">Post</string>
+    <string name="closing_date_20_04_2023">Closing Date: 20/04/2023</string>
+    <string name="job_ref_no_2030865">Job Ref No: 2030865</string>
+    <string name="closing_date_11_04_2023">Closing Date: 11/04/2023</string>
+    <string name="it_oparators_kelaniya">IT oparators,kelaniya \nRs 55,000 – 100,000</string>
+    <string name="junior_executive_it">Junior Executive - IT</string>
+    <string name="accounts_assistant_colombo_rs_35_000_80_000">Accounts Assistant,Colombo \nRs 35,000 – 80,000</string>
+    <string name="job_ref_no_1065048">Job Ref No: 1065048</string>
+    <string name="closing_date_31_03_2023">Closing Date: 31/03/2023</string>
+    <string name="data_oparators_kelaniya_rs_55_000_100_000">Data oparators,kelaniya  \nRs 55,000 – 100,000</string>
+    <string name="finance_executive_female">Finance Executive (Female)</string>
+    <string name="job_ref_no_1085032">Job Ref No: 1085032</string>
+    <string name="account_assist">Account Assistant (Male)</string>
+    <string name="logo01">logo01</string>
+    <string name="Update">Update Vacancy</string>
+    <string name="update">Update</string>
+    <string name="areyou">Are you sure that you want to delete this post?</string>
+    <string name="del">Delete</string>
+    <string name="delete">Delete Vacancy</string>
+    <string name="companyName">Company Name</string>
+    <string name="company">Company Name</string>
+    <string name="desc">Description</string>
+    <string name="loading_data">Loading Data.....</string>
+
+
 
 
 
