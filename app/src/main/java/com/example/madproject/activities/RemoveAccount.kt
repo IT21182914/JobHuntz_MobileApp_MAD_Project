@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class RemoveAccount : AppCompatActivity() {
-    private lateinit var RemoveBtn : Button
-    private lateinit var CancelBtn : Button
+    private lateinit var removeBtn : Button
+    private lateinit var cancelBtn : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,29 +24,32 @@ class RemoveAccount : AppCompatActivity() {
         val id =  intent.getStringExtra("REFID")
         Log.d("TAG", "this is ref id$id")
 
-        RemoveBtn = findViewById(R.id.rmvBtn)
-        CancelBtn =findViewById(R.id.cnslBtn)
+        removeBtn = findViewById(R.id.rmvBtn)
+        cancelBtn =findViewById(R.id.cnslBtn)
 
-        RemoveBtn.setOnClickListener{
+        removeBtn.setOnClickListener{
+
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("data/${id}")
 
             myRef.removeValue().addOnSuccessListener {
                Log.d("TAG", "DELETED successfully")
+
+                val mAuth = FirebaseAuth.getInstance()
+                mAuth.signOut()
+
+                Toast.makeText(applicationContext,"Logged out", Toast.LENGTH_SHORT).show()
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                finish()
+                startActivity(intent)
+
             }.addOnFailureListener {
                 it.message?.let { it1 -> Log.d("TAG", it1) }
             }
 
-            val mAuth = FirebaseAuth.getInstance()
-            mAuth.signOut()
-
-            Toast.makeText(applicationContext,"Logged out", Toast.LENGTH_SHORT).show()
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-            finish()
         }
 
-        CancelBtn.setOnClickListener{
+        cancelBtn.setOnClickListener{
             val name = "intent.getStringExtra(MainActivity.EXTRA_NAME)"
 
             val mode = intent.getStringExtra("USER")
