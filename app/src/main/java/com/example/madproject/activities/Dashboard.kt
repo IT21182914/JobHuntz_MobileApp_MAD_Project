@@ -22,7 +22,7 @@ class Dashboard : AppCompatActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
 
-
+//hello
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +37,10 @@ class Dashboard : AppCompatActivity() {
         }
         binding.findJob.setOnClickListener{
             val intent = Intent(applicationContext, ViewListingMain::class.java)
+            startActivity(intent)
+        }
+        binding.postJobs.setOnClickListener{
+            val intent = Intent(applicationContext, PostJob::class.java)
             startActivity(intent)
         }
 

@@ -16,7 +16,7 @@ import com.example.madproject.R
     class FetchingActivity : AppCompatActivity() {
 
 
-    //initialize
+    //initialize recyclerView
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
@@ -40,6 +40,8 @@ import com.example.madproject.R
 
     }
 
+
+        //getListingsData method
     private fun getListingsData() {
 
         listRecyclerView.visibility = View.GONE
