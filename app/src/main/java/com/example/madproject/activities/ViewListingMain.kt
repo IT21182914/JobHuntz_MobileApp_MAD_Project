@@ -8,9 +8,10 @@ import android.widget.Button
 import com.example.madproject.R
 
 
-
 class ViewListingMain : AppCompatActivity() {
 
+
+    //buttons initialization
     private lateinit var btnJobAdd : Button
     private lateinit var btnJobView : Button
 
@@ -22,6 +23,7 @@ class ViewListingMain : AppCompatActivity() {
         setContentView(R.layout.activity_view_listing_main)
 
 
+            //set path to the btnJobAdd buttons
             btnJobAdd = findViewById(R.id.btnJobAdd)
 
               btnJobAdd.setOnClickListener{
@@ -31,12 +33,14 @@ class ViewListingMain : AppCompatActivity() {
 
               }
 
-        btnJobView = findViewById(R.id.btnJobView)
 
-        btnJobView.setOnClickListener{
+            //set path to the btnJobView buttons
+            btnJobView = findViewById(R.id.btnJobView)
 
-            val intent = Intent(this, FetchingActivity::class.java)
-            startActivity(intent)
+              btnJobView.setOnClickListener{
+
+                  val intent = Intent(this, FetchingActivity::class.java)
+                  startActivity(intent)
 
         }
 

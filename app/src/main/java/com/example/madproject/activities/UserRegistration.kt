@@ -79,7 +79,7 @@ class UserRegistration : AppCompatActivity() {
 
            val userId = dbRef.push().key!!
 
-           val user = UserModel(userId, userName, userEmail, userPhone, userPassword)
+           val user = UserModel(userId, userName, userEmail, userPhone, userPassword,"Enter Your bio here!")
 
            dbRef.child(userId).setValue(user)
                .addOnCompleteListener {

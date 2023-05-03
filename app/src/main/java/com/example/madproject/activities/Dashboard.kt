@@ -35,6 +35,10 @@ class Dashboard : AppCompatActivity() {
             val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
             startActivity(intent)
         }
+        binding.findJob.setOnClickListener{
+            val intent = Intent(applicationContext, ViewListingMain::class.java)
+            startActivity(intent)
+        }
 
         if (intent.getIntExtra(METHOD,0) == 1001){
 
@@ -100,18 +104,7 @@ class Dashboard : AppCompatActivity() {
                                     startActivity(intent)
                                 }
 
-                                binding.findJob.setOnClickListener{
 
-                                    val intent = Intent(applicationContext, ViewListingMain::class.java)
-                                    intent.putExtra("NAME", name)
-
-                                    intent.putExtra("BIO", bio)
-                                    intent.putExtra("ID", userId)
-                                    intent.putExtra("REFID",refId)
-
-                                    intent.putExtra("USER", "GOOGLE_USER")
-                                    startActivity(intent)
-                                }
 
                             } else {
                                 binding.TextName.text = intent.getStringExtra(EXTRA_NAME)

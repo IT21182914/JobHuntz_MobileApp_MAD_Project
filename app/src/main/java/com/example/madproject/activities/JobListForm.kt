@@ -13,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 class JobListForm : AppCompatActivity() {
 
+
+    //initialize
     private lateinit var jobName: EditText
     private lateinit var jobSalary: EditText
     private lateinit var jobDes: EditText
@@ -21,7 +23,7 @@ class JobListForm : AppCompatActivity() {
 
     private lateinit var btnListSave: Button
 
-
+    //database
     private lateinit var dbRef: DatabaseReference
 
 
@@ -29,7 +31,7 @@ class JobListForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_list_form)
 
-
+        //assign
         jobName = findViewById(R.id.jobName)
         jobSalary = findViewById(R.id.jobSalary)
         jobDes = findViewById(R.id.jobDes)
@@ -48,8 +50,11 @@ class JobListForm : AppCompatActivity() {
 
     }
 
+
+    //saveListingData method
     private fun saveListingData(){
 
+    //validate form
     var count = 0
 
         //getting values
@@ -58,9 +63,6 @@ class JobListForm : AppCompatActivity() {
         val jobDesVar = jobDes.text.toString()
         val benefitJobVar = benefitJob.text.toString()
         val companyInfoVar = companyInfo.text.toString()
-
-
-
 
 
         if(jobNameVar.isEmpty()){
