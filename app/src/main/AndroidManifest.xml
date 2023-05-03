@@ -79,7 +79,21 @@
 
 <!--AMANDA-->
 
-
+        <activity
+            android:name=".activities.CategoryItem"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreateCategories"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UpdateCategory"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DeleteCategory"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CategoryMain"
+            android:exported="false"/>
 
 
         <activity

@@ -43,6 +43,10 @@
 
 
 
+    <color name= "update">#3471eb</color>
+    <color name= "delete">#EF1150</color>
+
+
 
 
 </resources>
