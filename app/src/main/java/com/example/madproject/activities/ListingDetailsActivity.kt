@@ -59,6 +59,8 @@ class ListingDetailsActivity : AppCompatActivity() {
 
     }
 
+
+    //initView Method
     private fun initView(){
 
         tvListId = findViewById(R.id.tvListId)
@@ -74,6 +76,8 @@ class ListingDetailsActivity : AppCompatActivity() {
 
 
     }
+
+    //setValuesToViews Method
     private fun setValuesToViews(){
 
         tvListId.text = intent.getStringExtra("ListId")
@@ -86,6 +90,9 @@ class ListingDetailsActivity : AppCompatActivity() {
 
     }
 
+
+
+    //openUpdateDialog Method
     private fun openUpdateDialog(
         listId: String,
         JobName: String,
@@ -128,6 +135,7 @@ class ListingDetailsActivity : AppCompatActivity() {
 
             )
 
+            //message for details update
             Toast.makeText(applicationContext, "Listing Data Updated", Toast.LENGTH_LONG).show()
 
             //we are setting updated data to our textviews

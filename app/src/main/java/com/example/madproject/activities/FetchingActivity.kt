@@ -40,6 +40,8 @@ import com.example.madproject.R
 
     }
 
+
+        //getListingsData method
     private fun getListingsData() {
 
         listRecyclerView.visibility = View.GONE
