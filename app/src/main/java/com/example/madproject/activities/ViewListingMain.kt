@@ -11,7 +11,7 @@ import com.example.madproject.R
 class ViewListingMain : AppCompatActivity() {
 
 
-    //initialize buttons
+    //buttons initialization
     private lateinit var btnJobAdd : Button
     private lateinit var btnJobView : Button
 
