@@ -10,7 +10,7 @@ import com.example.madproject.R
 import com.google.firebase.database.FirebaseDatabase
 
 class UpdateVacancy : AppCompatActivity() {
-    //creating variables
+
     private lateinit var title : TextView
     private lateinit var desc : TextView
     private lateinit var update : Button
