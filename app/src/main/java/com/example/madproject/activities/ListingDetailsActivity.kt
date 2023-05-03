@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ListingDetailsActivity : AppCompatActivity() {
 
-
+//initialize
     private lateinit var tvListId: TextView
     private lateinit var tvJobName: TextView
     private lateinit var tvJobSalary: TextView
@@ -34,10 +34,12 @@ class ListingDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing_details)
 
+
+        //method calling
         initView()
         setValuesToViews()
 
-
+        //Update Button
         btnUpdate.setOnClickListener {
             Log.d("TAG","ID ${intent.getStringExtra("ListId").toString()}")
             openUpdateDialog(
@@ -46,6 +48,8 @@ class ListingDetailsActivity : AppCompatActivity() {
             )
         }
 
+
+        //Delete Button
         btnDelete.setOnClickListener {
             deleteRecord(
                 intent.getStringExtra("ListId").toString()
@@ -55,6 +59,8 @@ class ListingDetailsActivity : AppCompatActivity() {
 
     }
 
+
+    //initView Method
     private fun initView(){
 
         tvListId = findViewById(R.id.tvListId)
@@ -69,8 +75,9 @@ class ListingDetailsActivity : AppCompatActivity() {
         btnDelete = findViewById(R.id.btnDeleteL2)
 
 
-
     }
+
+    //setValuesToViews Method
     private fun setValuesToViews(){
 
         tvListId.text = intent.getStringExtra("ListId")
@@ -81,11 +88,11 @@ class ListingDetailsActivity : AppCompatActivity() {
         tvCompanyInfo.text = intent.getStringExtra("CompanyInfo")
 
 
-
-
-
     }
 
+
+
+    //openUpdateDialog Method
     private fun openUpdateDialog(
         listId: String,
         JobName: String,
@@ -110,6 +117,8 @@ class ListingDetailsActivity : AppCompatActivity() {
         benefitJob.setText(intent.getStringExtra("Benefits").toString())
         companyInfo.setText(intent.getStringExtra("CompanyInfo").toString())
 
+
+        //Set Job Name to the update dialog
         mDialog.setTitle("Updating $JobName Record")
 
         val alertDialog = mDialog.create()
@@ -126,6 +135,7 @@ class ListingDetailsActivity : AppCompatActivity() {
 
             )
 
+            //message for details update
             Toast.makeText(applicationContext, "Listing Data Updated", Toast.LENGTH_LONG).show()
 
             //we are setting updated data to our textviews
@@ -138,6 +148,9 @@ class ListingDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+
+    //Update Job Listing
     private fun updateListingData(
         id: String,
         name: String,
@@ -153,6 +166,8 @@ class ListingDetailsActivity : AppCompatActivity() {
     }
 
 
+
+    //Delete Job Listing
     private fun deleteRecord(
         id: String
     ){
