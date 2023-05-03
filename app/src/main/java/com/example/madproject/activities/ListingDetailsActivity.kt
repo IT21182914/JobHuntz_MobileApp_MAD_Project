@@ -110,6 +110,8 @@ class ListingDetailsActivity : AppCompatActivity() {
         benefitJob.setText(intent.getStringExtra("Benefits").toString())
         companyInfo.setText(intent.getStringExtra("CompanyInfo").toString())
 
+
+        //Set Job Name to the update dialog
         mDialog.setTitle("Updating $JobName Record")
 
         val alertDialog = mDialog.create()
