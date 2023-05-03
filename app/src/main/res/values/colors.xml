@@ -29,4 +29,24 @@
     <color name="update_color">#3471eb</color>
     <color name="delete_color">#EF1150</color>
     <color name="divider_grey">#CCCCCC</color>
+
+
+
+
+    <color name="ivory">#FFFFF0</color>
+    <color name="light_yellow">#FFFFE0</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="snow">#FFFAFA</color>
+    <color name="floral_white">#FFFAF0</color>
+    <color name="lemon_chiffon">#FFFACD</color>
+    <color name="cornsilk">#FFF8DC</color>
+
+
+
+    <color name= "update">#3471eb</color>
+    <color name= "delete">#EF1150</color>
+
+
+
+
 </resources>

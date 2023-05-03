@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/companyTag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".activities.PostVC">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/btnPost"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/Heading"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="191dp"
+        android:text="@string/company"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/titleName"
+        android:layout_width="@dimen/formWidth"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:background="@drawable/description_back"
+        android:ems="10"
+        android:hint="@string/company"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_txt"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/descriptionTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="240dp"
+        android:text="@string/desc"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleName" />
+
+    <EditText
+        android:id="@+id/descField"
+        android:layout_width="@dimen/formWidth"
+        android:layout_height="216dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:background="@drawable/description_back"
+        android:ems="10"
+        android:hint="@string/desc"
+        android:inputType="textMultiLine"
+        android:lines="12"
+        android:maxLines="12"
+        android:padding="15dp"
+        android:scrollbars="vertical"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTag"
+        tools:ignore="TextSizeCheck" />
+
+    <Button
+        android:id="@+id/postBtn"
+        android:layout_width="321dp"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/post"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="@+id/descField"
+        app:layout_constraintStart_toStartOf="@+id/descField"
+        app:layout_constraintTop_toBottomOf="@+id/descField"
+        tools:ignore="VisualLintBounds" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="321dp"
+        android:layout_height="@dimen/fieldHeight"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#EF1150"
+        android:text="@string/cancel"
+        android:textSize="@dimen/Text22"
+        app:layout_constraintEnd_toEndOf="@+id/postBtn"
+        app:layout_constraintStart_toStartOf="@+id/postBtn"
+        app:layout_constraintTop_toBottomOf="@+id/postBtn"
+        tools:ignore="VisualLintBounds" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
