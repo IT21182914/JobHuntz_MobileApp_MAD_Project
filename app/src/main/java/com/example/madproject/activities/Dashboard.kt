@@ -3,12 +3,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.madproject.R
 import com.example.madproject.activities.MainActivity.Companion.EXTRA_NAME
 import com.example.madproject.activities.MainActivity.Companion.METHOD
 import com.example.madproject.activities.MainActivity.Companion.UID
 import com.example.madproject.activities.MainActivity.Companion.USER_ID
+import com.example.madproject.activities.MainActivity.Companion.USER_PHOTO
 import com.example.madproject.databinding.ActivityDashboardBinding
 import com.example.madproject.models.GoogleUser
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +25,7 @@ import com.google.firebase.database.ValueEventListener
 class Dashboard : AppCompatActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
+    private lateinit var profileImage : ImageView
 
 //hello
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +35,34 @@ class Dashboard : AppCompatActivity() {
         setContentView(binding.root)
 
 //        binding.TextName.text = intent.getStringExtra(EXTRA_NAME)
+        profileImage = findViewById(R.id.profile_image)
 
+        Glide.with(this)
+            .load(intent.getStringExtra(USER_PHOTO))
+            .into(profileImage)
+
+    val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+    val userNid = sp.getString("userId", "")
+    val userName = sp.getString("userName", "")
+    val userImage = sp.getString("userImage", "")
+    val userPhone = sp.getString("userPhoto", "")
+    val userBio = sp.getString("userBio", "")
+    val userEmail = sp.getString("userEmail", "")
+
+    Log.d("TAGD", "Log activity " +
+            "\n$userNid and " +
+            "\n$userName $userImage" +
+            "\n$userPhone" +
+            "\n$userBio" +
+            "\n$userEmail")
+
+
+
+        val uUid = intent.getStringExtra("USRID")
         binding.profileImage.setOnClickListener{
             val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
+            intent.putExtra("USRID", uUid)
             startActivity(intent)
         }
         binding.findJob.setOnClickListener{
@@ -90,8 +120,17 @@ class Dashboard : AppCompatActivity() {
 
                                     val userNid = sp.getString("userId", "")
                                     val userName = sp.getString("userName", "")
+                                    val userImage = sp.getString("userId", "")
+                                    val userPhone = sp.getString("userName", "")
+                                    val userBio = sp.getString("userId", "")
+                                    val userEmail = sp.getString("userName", "")
 
-                                Log.d("TAG", "Log activity $userNid and $userName")
+                                Log.d("TAGD", "Log activity " +
+                                        "\n$userNid and " +
+                                        "\n$userName $userImage" +
+                                        "\n$userPhone" +
+                                        "\n$userBio" +
+                                        "\n$userEmail")
 
                                 binding.TextName.text = userName
 

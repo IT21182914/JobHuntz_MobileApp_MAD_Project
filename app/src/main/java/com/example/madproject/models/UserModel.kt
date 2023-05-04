@@ -6,5 +6,7 @@ data class UserModel(
     var email: String? = null,
     var phone: String? = null,
     var password: String? = null,
-    var bio : String? = null
+    var bio : String? = null,
+    var userImage : String? = null
+
 )

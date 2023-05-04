@@ -157,6 +157,8 @@ class MainActivity : AppCompatActivity() {
                                 USER_ID = foundUser?.userId.toString()
                                 intent.putExtra(UID, USER_ID)
                                 intent.putExtra(METHOD, 1002)
+                                intent.putExtra(USER_PHOTO,foundUser?.userImage)
+                                intent.putExtra("USRID", foundUser?.userId)
 
                                 userIDs = USER_ID
 
@@ -165,7 +167,12 @@ class MainActivity : AppCompatActivity() {
                                 // Save user's session data
                                 sharedPreferences.edit().apply {
                                     putString("userId", userIDs)
+                                    putString("userID", foundUser?.userId)
+                                    putString("userImage", foundUser?.userImage)
                                     putString("userName", foundUser?.name)
+                                    putString("userBio", foundUser?.bio)
+                                    putString("userEmail", foundUser?.email)
+                                    putString("userPassword", foundUser?.password)
                                     putBoolean("isLoggedIn", true)
                                     apply()
                                 }
@@ -252,6 +259,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(METHOD, RC_SIGN_IN)
             intent.putExtra(USER_ID, user.uid)
             intent.putExtra(USER_PHOTO, user.photoUrl)
+
             //hidingProgressbar
             hideProgress()
             startActivity(intent)
