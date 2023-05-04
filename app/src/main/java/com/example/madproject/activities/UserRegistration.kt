@@ -78,8 +78,9 @@ class UserRegistration : AppCompatActivity() {
        if(count == 0) {
 
            val userId = dbRef.push().key!!
+           val image = "https://firebasestorage.googleapis.com/v0/b/mad-project-d6d2d.appspot.com/o/Profile%2FnewUser.png?alt=media&token=0051c3d2-aa6b-4886-9b66-7efb12a6cac3"
 
-           val user = UserModel(userId, userName, userEmail, userPhone, userPassword,"Enter Your bio here!")
+           val user = UserModel(userId, userName, userEmail, userPhone, userPassword,"Enter Your bio here!", image,false)
 
            dbRef.child(userId).setValue(user)
                .addOnCompleteListener {
