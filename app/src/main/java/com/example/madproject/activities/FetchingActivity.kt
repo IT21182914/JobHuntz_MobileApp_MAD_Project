@@ -16,7 +16,7 @@ import com.example.madproject.R
     class FetchingActivity : AppCompatActivity() {
 
 
-    //initialize recyclerView
+    //initialize
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
