@@ -23,7 +23,7 @@ class DeletePost : AppCompatActivity() {
         cancelPBtn = findViewById(R.id.cancelpBtn)
 
         deletePBtn.setOnClickListener{
-            val dbRef = FirebaseDatabase.getInstance().getReference("data")
+            val dbRef = FirebaseDatabase.getInstance().getReference("post")
             val ref = dbRef.child(intent.getStringExtra("PostID")!!)
             ref.removeValue().addOnCompleteListener{
                 Toast.makeText(this,"Post deleted successfully",Toast.LENGTH_LONG).show()

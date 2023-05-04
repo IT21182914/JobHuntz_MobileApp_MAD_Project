@@ -38,7 +38,7 @@ class UpdateVacancy : AppCompatActivity() {
 
             if (count==0){
 
-                val dbRef = FirebaseDatabase.getInstance().getReference("data")
+                val dbRef = FirebaseDatabase.getInstance().getReference("post")
                 val ref = dbRef.child(intent.getStringExtra("PostID")!!)
                 ref.child("companyName").setValue(name)
                 ref.child("description").setValue(description)
