@@ -54,7 +54,7 @@ class CurrentVc : AppCompatActivity() {
 
         tvLoadingData.visibility = View.VISIBLE
 
-        dbRef = FirebaseDatabase.getInstance().getReference("data")
+        dbRef = FirebaseDatabase.getInstance().getReference("post")
         Log.d("TAG", "This id $dbRef")
         dbRef.addValueEventListener(object : ValueEventListener {
 
