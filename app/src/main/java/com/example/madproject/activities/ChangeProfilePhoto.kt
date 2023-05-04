@@ -25,12 +25,13 @@ class ChangeProfilePhoto : AppCompatActivity() {
     private lateinit var dtabase: DatabaseReference
     private lateinit var storage: FirebaseStorage
     private lateinit var selectedImage: Uri
-    private lateinit var dialog: AlertDialog.Builder
     private lateinit var edtBtn : Button
     private lateinit var image : ImageView
     private lateinit var save : Button
     private lateinit var cancel : Button
     private lateinit var currentImage : ImageView
+    private var meth : Int? = null
+    private var refId : String? = null
 
     private lateinit var diaog :Dialog
 
@@ -42,6 +43,8 @@ class ChangeProfilePhoto : AppCompatActivity() {
 
         dtabase = FirebaseDatabase.getInstance().getReference("data")
         storage = FirebaseStorage.getInstance()
+
+        meth = intent.getIntExtra("METHOD",1)
 
         currentImage = findViewById(R.id.profile_image2)
         edtBtn = findViewById(R.id.edtProfile)
@@ -63,6 +66,8 @@ class ChangeProfilePhoto : AppCompatActivity() {
         val userPhone = sp.getString("userPhoto", "")
         val userBio = sp.getString("userBio", "")
         val userEmail = sp.getString("userEmail", "")
+
+        refId = userNid
 
         Log.d("TAGD", "Log activity in Update image " +
                 "\n$userNid and " +
@@ -86,6 +91,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
         }
         cancel.setOnClickListener{
             val intent = Intent(this@ChangeProfilePhoto, Dashboard::class.java)
+            intent.putExtra("METHOD",meth)
             startActivity(intent)
         }
 
@@ -106,17 +112,19 @@ class ChangeProfilePhoto : AppCompatActivity() {
     }
 
     private fun uploadInfo(imgUrl: String) {
-        val user = UserModel( imgUrl)
-        val idUsr = intent.getStringExtra("USRID").toString()
+        UserModel( imgUrl)
+
+        val idUsr = refId.toString()
+
         dtabase.child(idUsr)
             .child("userImage")
             .setValue(imgUrl)
             .addOnSuccessListener {
+
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_SHORT).show()
                 hideProgress()
                 val intent = Intent(this@ChangeProfilePhoto, Dashboard::class.java)
-                intent.putExtra(MainActivity.METHOD, 1002)
-                intent.putExtra(MainActivity.UID, MainActivity.USER_ID)
+                    intent.putExtra("METHOD", meth)
                 startActivity(intent)
 
             }.addOnFailureListener{

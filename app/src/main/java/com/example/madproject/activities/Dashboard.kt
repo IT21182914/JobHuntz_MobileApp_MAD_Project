@@ -29,18 +29,11 @@ class Dashboard : AppCompatActivity() {
 
 //hello
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    super.onCreate(savedInstanceState)
+    binding = ActivityDashboardBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-//        binding.TextName.text = intent.getStringExtra(EXTRA_NAME)
-        profileImage = findViewById(R.id.profile_image)
-
-        Glide.with(this)
-            .load(intent.getStringExtra(USER_PHOTO))
-            .into(profileImage)
-
+    //getting details from shared preference
     val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
 
     val userNid = sp.getString("userId", "")
@@ -50,181 +43,141 @@ class Dashboard : AppCompatActivity() {
     val userBio = sp.getString("userBio", "")
     val userEmail = sp.getString("userEmail", "")
 
-    Log.d("TAGD", "Log activity " +
-            "\n$userNid and " +
-            "\n$userName $userImage" +
-            "\n$userPhone" +
-            "\n$userBio" +
-            "\n$userEmail")
+    val isLogIn = sp.getBoolean("isLoggedIn", false)
+
+    val userRefID = sp.getString("refId", "")
+    val googleUserId = sp.getString("googleUserID", "")
 
 
+    Log.d(
+        "TAGD", "Log activity " +
+                "\n$userNid and " +
+                "\n$userName $userImage" +
+                "\n$userPhone" +
+                "\n$userBio" +
+                "\n$userEmail"
+    )
 
-        val uUid = intent.getStringExtra("USRID")
-        binding.profileImage.setOnClickListener{
-            val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
-            intent.putExtra("USRID", uUid)
-            startActivity(intent)
-        }
-        binding.findJob.setOnClickListener{
-            val intent = Intent(applicationContext, ViewListingMain::class.java)
-            startActivity(intent)
-        }
-        binding.postJobs.setOnClickListener{
-            val intent = Intent(applicationContext, PostJob::class.java)
-            startActivity(intent)
-        }
+    //initialize profile imageView
+    profileImage = findViewById(R.id.profile_image)
 
-        if (intent.getIntExtra(METHOD,0) == 1001){
+    //setting user image
+    Glide.with(this)
+        .load(userImage)
+        .into(profileImage)
 
-            if(intent.getStringExtra(USER_ID) != null) {
+    if (isLogIn) {
 
-                Log.d("TAG", "This method is google user ID ${intent.getStringExtra(USER_ID)!!}")
-
-                val dbRef = FirebaseDatabase.getInstance()
-                val ref = dbRef.getReference("data")
-
-                val userId = intent.getStringExtra(USER_ID)
-
-                Log.d("TAG", "THIS IS LOG $userId")
-
-                ref.orderByChild("userId").equalTo(userId)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            //if user exist in firebase db
-                            if (dataSnapshot.exists()) {
-                                var name  = ""
-                                var bio  = ""
-                                var refId  = ""
-
-                                // Data exists, retrieve the value
-                                for (Dat in dataSnapshot.children) {
-                                    val userData = Dat.getValue(GoogleUser::class.java)
-                                    name = userData?.name.toString()
-                                    bio = userData?.bio.toString()
-                                    refId = userData?.refIId.toString()
-                                }
-
-                                val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-
-                                // Save user's session data
-                                sharedPreferences.edit().apply {
-                                    putString("refId", refId)
-                                    putString("userName", name)
-                                    putString("userBio", bio)
-                                    apply()
-                                }
-
-                                // Check if user is logged in
-                                val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-
-                                    val userNid = sp.getString("userId", "")
-                                    val userName = sp.getString("userName", "")
-                                    val userImage = sp.getString("userId", "")
-                                    val userPhone = sp.getString("userName", "")
-                                    val userBio = sp.getString("userId", "")
-                                    val userEmail = sp.getString("userName", "")
-
-                                Log.d("TAGD", "Log activity " +
-                                        "\n$userNid and " +
-                                        "\n$userName $userImage" +
-                                        "\n$userPhone" +
-                                        "\n$userBio" +
-                                        "\n$userEmail")
-
-                                binding.TextName.text = userName
-
-                                binding.line1.setOnClickListener{
-
-                                    val intent = Intent(applicationContext, ViewProfile::class.java)
-                                    intent.putExtra("NAME", name)
-
-                                    intent.putExtra("BIO", bio)
-                                    intent.putExtra("ID", userId)
-                                    intent.putExtra("REFID",refId)
-
-                                    intent.putExtra("USER", "GOOGLE_USER")
-                                    startActivity(intent)
-                                }
-
-
-
-                            } else {
-                                binding.TextName.text = intent.getStringExtra(EXTRA_NAME)
-                                // Data does not exist, create a new user
-                                val dbRefs = FirebaseDatabase.getInstance()
-                                val refs = dbRefs.getReference("data")
-
-                                val refID = refs.push().key!!
-
-                                val user = GoogleUser(
-                                    userId,
-                                    refID,
-                                    intent.getStringExtra(EXTRA_NAME),
-                                    "Add your bio here."
-                                )
-
-                                refs.child(refID).setValue(user).addOnCompleteListener {
-
-                                        binding.line1.setOnClickListener{
-                                            val name = intent.getStringExtra(EXTRA_NAME)
-                                            val intent = Intent(applicationContext, ViewProfile::class.java)
-                                            intent.putExtra("NAME",  name)
-                                            intent.putExtra("BIO", "Add your bio here.")
-                                            intent.putExtra("ID", userId)
-                                            intent.putExtra("REFID", refID)
-                                            intent.putExtra("USER", "GOOGLE_USER")
-                                            startActivity(intent)
-                                        }
-
-                                    }.addOnFailureListener { err ->
-                                        Toast.makeText(
-                                            this@Dashboard,
-                                            "Error: ${err.message} ",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    Log.d("TAG", "USER DOES NOT EXIST")
-                                    }
-
-                            }
-                        }
-                        override fun onCancelled(error: DatabaseError) {
-                            // Handle any errors that may occur during the retrieval
-                            Log.e("TAG", "Failed to get data: ${error.message}")
-                        }
-                    })
-            }
-
-
-        }else if(intent.getIntExtra(METHOD,1) == 1002){
-            Log.d("TAG", "\n102 hitted\n")
-            Log.d("TAG", "This meth value ${intent.getIntExtra(METHOD, 1)}")
-            binding.TextName.text = intent.getStringExtra(EXTRA_NAME)
-
-            if(intent.getStringExtra(UID) != null){
-                Log.d("TAG", "This method is firebase user ID ${intent.getStringExtra(UID)!!}")
-
-                binding.line1.setOnClickListener{
-                    val intent = Intent(applicationContext, ViewProfile::class.java)
-                    startActivity(intent)
-                }
-            }
-        }
-
-        binding.logout.setOnClickListener{
+        binding.logoutBtn.setOnClickListener {
             val mAuth = FirebaseAuth.getInstance()
             mAuth.signOut()
 
-            Toast.makeText(applicationContext,"Logged out", Toast.LENGTH_SHORT).show()
+            val sharedPreferences = getSharedPreferences("my_app_preferences", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("is_logged_in", false)
+            editor.apply()
+
+            Toast.makeText(applicationContext, "Logged out", Toast.LENGTH_SHORT).show()
             val intent = Intent(applicationContext, MainActivity::class.java)
+
+            startActivity(intent)
+
             finish()
-            startActivity(intent)
         }
 
-        binding.notifications.setOnClickListener{
-            val intent = Intent(applicationContext, Notifications::class.java)
-            startActivity(intent)
+        //if login method is 1001 Google user
+        if (intent.getIntExtra(METHOD, 0) == 1001) {
+
+            binding.TextName.text = userName
+
+            //binding profile image
+            binding.profileImage.setOnClickListener {
+                val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
+                intent.putExtra("METHOD", 1001)
+                startActivity(intent)
+            }
+            //binding find job button
+            binding.findJob.setOnClickListener {
+                val intent = Intent(applicationContext, ViewListingMain::class.java)
+                intent.putExtra("METHOD", 1001)
+                startActivity(intent)
+            }
+
+            //binding post job icon
+            binding.postJobs.setOnClickListener {
+                val intent = Intent(applicationContext, PostJob::class.java)
+                intent.putExtra("METHOD", 1001)
+                startActivity(intent)
+            }
+
+            //binding categories
+            binding.categories.setOnClickListener {
+                NotificationConfig.notifyObject.notifyHere(this)
+            }
+
+            binding.line1.setOnClickListener {
+
+                val intent = Intent(applicationContext, ViewProfile::class.java)
+                intent.putExtra("NAME", userName)
+
+                intent.putExtra("BIO", userBio)
+                intent.putExtra("ID", googleUserId)
+                intent.putExtra("REFID", userRefID)
+                intent.putExtra("METHOD", 1001)
+                intent.putExtra("USER", "GOOGLE_USER")
+                startActivity(intent)
+            }
+            binding.notifications.setOnClickListener {
+                val intent = Intent(applicationContext, Notifications::class.java)
+                intent.putExtra("METHOD", 1001)
+                startActivity(intent)
+            }
+
+
+        } else if (intent.getIntExtra(METHOD, 1) == 1002) {
+
+            binding.TextName.text = userName
+
+            binding.line1.setOnClickListener {
+                val intent = Intent(applicationContext, ViewProfile::class.java)
+                startActivity(intent)
+            }
+            //binding profile image
+            binding.profileImage.setOnClickListener {
+                val intent = Intent(this@Dashboard, ChangeProfilePhoto::class.java)
+                intent.putExtra("METHOD", 1002)
+                startActivity(intent)
+            }
+            //binding find job button
+            binding.findJob.setOnClickListener {
+                val intent = Intent(applicationContext, ViewListingMain::class.java)
+                intent.putExtra("METHOD", 1002)
+                startActivity(intent)
+            }
+
+            //binding post job icon
+            binding.postJobs.setOnClickListener {
+                val intent = Intent(applicationContext, PostJob::class.java)
+                intent.putExtra("METHOD", 1002)
+                startActivity(intent)
+            }
+
+            //binding categories
+            binding.categories.setOnClickListener {
+                NotificationConfig.notifyObject.notifyHere(this)
+            }
+
+            binding.notifications.setOnClickListener {
+                val intent = Intent(this@Dashboard, Notifications::class.java)
+                intent.putExtra("METHOD", 1002)
+                startActivity(intent)
+            }
         }
 
+        }else{
+            val intent = Intent(this@Dashboard, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

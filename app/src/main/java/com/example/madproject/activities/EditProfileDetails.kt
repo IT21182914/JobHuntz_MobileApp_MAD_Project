@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.madproject.R
-import com.example.madproject.activities.MainActivity.Companion.EXTRA_NAME
 import com.example.madproject.activities.MainActivity.Companion.METHOD
 import com.example.madproject.activities.MainActivity.Companion.USER_ID
 import com.example.madproject.activities.MainActivity.Companion.USID
@@ -39,12 +38,16 @@ class EditProfileDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile_details)
 
+
         edtName = findViewById(R.id.userEditName)
         edtEmail = findViewById(R.id.userEditMail)
         edtPhone = findViewById(R.id.userEditPhone)
         edtBio = findViewById(R.id.userEdtBio)
-        updateBtn = findViewById(R.id.updateBtn)
+        updateBtn = findViewById(R.id.saveChangesBtn)
         cancelbtn = findViewById(R.id.cancelChanges)
+
+
+
 
         if (intent.getStringExtra("USER") == "GOOGLE_USER") {
             Log.d("TAG", "GOOGLEUSER IS HERE")
@@ -89,8 +92,8 @@ class EditProfileDetails : AppCompatActivity() {
                 intent.putExtra(MainActivity.UID, USER_ID)
             }
 
-            finish()
             startActivity(intent)
+            finish()
         }
     }
     private fun updateDetails() {
@@ -123,6 +126,7 @@ class EditProfileDetails : AppCompatActivity() {
             ref.child("bio").setValue(bio)
 
             val intent = Intent(applicationContext, ViewProfile::class.java)
+                intent.putExtra("METHOD", 1002)
             startActivity(intent)
         }
 
@@ -159,18 +163,13 @@ class EditProfileDetails : AppCompatActivity() {
                                 val dbRefs = FirebaseDatabase.getInstance()
                                 val refs = dbRefs.getReference("data").child(userData?.refIId.toString())
 
-
                                 refs.child("name").setValue(name)
                                 refs.child("bio").setValue(bio)
 
-                                val intent = Intent(applicationContext, Dashboard::class.java)
-                                intent.putExtra(EXTRA_NAME ,name)
-                                intent.putExtra("BIO" ,bio)
-                                intent.putExtra("USER" ,"GOOGLE_USER")
+                                val intent = Intent(applicationContext, ViewProfile::class.java)
                                 intent.putExtra(METHOD, 1001)
-                                intent.putExtra(USER_ID, USID)
-                                finish()
                                 startActivity(intent)
+                                finish()
                             }
 
 

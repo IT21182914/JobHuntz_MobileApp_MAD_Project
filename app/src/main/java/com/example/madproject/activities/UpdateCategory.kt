@@ -21,7 +21,7 @@ class UpdateCategory: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update)
 
-        updateBtn = findViewById(R.id.updateBtn)
+        updateBtn = findViewById(R.id.saveChangesBtn)
         cancelBtn = findViewById(R.id.cancelUBrn)
         updateField = findViewById(R.id.ucategoryName)
 
