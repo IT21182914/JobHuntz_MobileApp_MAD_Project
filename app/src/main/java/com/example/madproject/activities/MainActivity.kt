@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.madproject.R
 import com.example.madproject.databinding.ActivityMainBinding
+import com.example.madproject.models.GoogleUser
 import com.example.madproject.models.UserModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -43,9 +44,6 @@ class MainActivity : AppCompatActivity() {
     //database reference
     private lateinit var dbRef : DatabaseReference
 
-    //id
-    private lateinit var userIDs :String
-
     //dialog
     private lateinit var diaog :Dialog
 
@@ -55,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//      initializing auth
         auth = Firebase.auth
 
         //configure google sign in
@@ -64,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         gsc = GoogleSignIn.getClient(this , gso)
+
+        //finding register link
         registerBtn = findViewById(R.id.registrationlink)
 
         //finding google icon
@@ -97,28 +98,30 @@ class MainActivity : AppCompatActivity() {
             showProgress()
             signIn()
         }
+
         registerBtn.setOnClickListener{
             val intent = Intent(applicationContext, UserRegistration::class.java)
             startActivity(intent)
         }
 
-
     }
 
+    //google sign in function
     private fun signIn() {
         val signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-/* validate function for login */
+
+/* validate function for normal user login with email and password */
     private fun validateData() {
 
         dbRef = FirebaseDatabase.getInstance().getReference("data")
 
-        val userEmailAdd = userEmail.text.toString()
-        val userPass = password.text.toString()
         var emailCount = 0
         var foundUser : UserModel? = null
+        val userEmailAdd = userEmail.text.toString()
+        val userPass = password.text.toString()
 
         dbRef.addValueEventListener(object  : ValueEventListener{
 
@@ -135,9 +138,7 @@ class MainActivity : AppCompatActivity() {
                             if(userEmailAdd == userData.email.toString()){
                                 emailCount += 1
                                 foundUser = userData
-
                             }
-
                         }
                     }
                     if(emailCount > 0){
@@ -150,27 +151,35 @@ class MainActivity : AppCompatActivity() {
 
                                 password.error = null
 
+                                //toast message to success full login
                                 Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
+
+                                //Intent to dashboard
                                 val intent = Intent(applicationContext, Dashboard::class.java)
 
-                                intent.putExtra(EXTRA_NAME, foundUser?.name)
-                                USER_ID = foundUser?.userId.toString()
-                                intent.putExtra(UID, USER_ID)
-                                intent.putExtra(METHOD, 1002)
-
-                                userIDs = USER_ID
-
+                                //creating user session
                                 val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
 
                                 // Save user's session data
                                 sharedPreferences.edit().apply {
-                                    putString("userId", userIDs)
+
+                                    //user details
+                                    putString("userId", foundUser?.userId)
+                                    putString("userImage", foundUser?.userImage)
                                     putString("userName", foundUser?.name)
+                                    putString("userBio", foundUser?.bio)
+                                    putString("userPhone", foundUser?.phone)
+                                    putString("userEmail", foundUser?.email)
+                                    putString("userPassword", foundUser?.password)
+                                    putBoolean("isAdmin", foundUser?.isAdmin!!)
+                                    putString("loggedInUser", "FIREBASE_USER")
                                     putBoolean("isLoggedIn", true)
                                     apply()
                                 }
                                 //hidingProgressbar
                                 hideProgress()
+
+                                // Start Dashboard
                                 startActivity(intent)
 
                             }else{
@@ -179,21 +188,17 @@ class MainActivity : AppCompatActivity() {
                                 password.error = "Password is incorrect"
                             }
                         }
-
                     }else{
                         userEmail.error = "This email address is not registere"
                         //hidingProgressbar
                         hideProgress()
                     }
-
                     Log.d(TAG, "loadUserData()details $foundUser")
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 
@@ -245,19 +250,167 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
+
+            //Toast successfully login message
             Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
+
+            //create intent to dashboard
             val intent = Intent(applicationContext, Dashboard::class.java)
+
+            //companion object for Google userID
             USID = user.uid
-            intent.putExtra(EXTRA_NAME, user.displayName)
-            intent.putExtra(METHOD, RC_SIGN_IN)
-            intent.putExtra(USER_ID, user.uid)
-            intent.putExtra(USER_PHOTO, user.photoUrl)
+
+            validateGoogleUser(user.uid, user.displayName!!)
+
             //hidingProgressbar
             hideProgress()
+            //start to dashboard
             startActivity(intent)
         }
     }
 
+    private fun validateGoogleUser(googleID: String, googleName: String) {
+
+        //log to identify user
+        Log.d("TAG", "This method is google user ID $googleID")
+
+        //get firebase reference
+        val dbRef = FirebaseDatabase.getInstance()
+        val ref = dbRef.getReference("data")
+
+        // creating empty variable to assign values
+        var refId  = ""
+
+        //creating Google user id variable
+
+        //finding user id
+        ref.orderByChild("userId").equalTo(googleID)
+
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    //if user exist in firebase db
+                    if (dataSnapshot.exists()) {
+
+                        // Data exists, retrieve the value
+                        for (Dat in dataSnapshot.children) {
+
+                            //fetching data from DB
+                            val userData = Dat.getValue(GoogleUser::class.java)
+                            refId = userData?.refIId.toString()
+
+                        }
+
+                    } else {
+
+                        //new google user
+                        // Data does not exist, create a new user
+
+                        val image = "https://firebasestorage.googleapis.com/v0/b/mad-project-d6d2d.appspot.com/o/Profile%2FnewUser.png?alt=media&token=0051c3d2-aa6b-4886-9b66-7efb12a6cac3"
+
+                        //generate firebase key
+                        val firebaseID = ref.push().key!!
+
+                        val user = GoogleUser(
+                            googleID,
+                            firebaseID,
+                            googleName,
+                            "Add your bio here.",
+                            image
+                        )
+                        //creating new user under refID
+                        ref.child(firebaseID).setValue(user).addOnCompleteListener {
+
+                            refId = firebaseID
+
+                        }.addOnFailureListener { err ->
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Error: ${err.message} ",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.d("TAG", "USER DOES NOT CREATED")
+                        }
+
+                    }
+
+                    var refCount = 0
+                    var foundUser : GoogleUser? = null
+
+                    ref.addValueEventListener(object  : ValueEventListener{
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+
+                            if(snapshot.exists()){
+
+                                for(userSnap in snapshot.children){
+
+                                    val userData = userSnap.getValue(GoogleUser::class.java)
+
+                                    if (userData != null) {
+
+                                        if(refId == userData.refIId.toString()){
+                                            refCount += 1
+                                            foundUser = userData
+                                        }
+                                    }
+                                }
+                                if(refCount > 0){
+
+                                    //creating user session
+                                    val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+                                    // Save user's session data
+                                    sharedPreferences.edit().apply {
+
+                                        //user details
+                                        putString("userId", foundUser?.refIId)
+                                        putString("userImage", foundUser?.userImage)
+                                        putString("userName", foundUser?.name)
+                                        putString("userBio", foundUser?.bio)
+                                        putString("googleID", foundUser?.userId)
+                                        putString("loggedInUser", "GOOGLE_USER")
+                                        putBoolean("isLoggedIn", true)
+                                        apply()
+                                    }
+
+
+                                    //toast message to success full login
+                                    Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
+
+                                    //Intent to dashboard
+                                    val intent = Intent(applicationContext, Dashboard::class.java)
+
+                                    //hidingProgressbar
+                                    hideProgress()
+                                    // Start Dashboard
+                                    startActivity(intent)
+
+                                }else{
+                                    Toast.makeText(this@MainActivity, "Try again later", Toast.LENGTH_SHORT).show()
+                                    //hidingProgressbar
+                                    hideProgress()
+                                }
+                                Log.d(TAG, "loadUserData()details $foundUser")
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+
+
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle any errors that may occur during the retrieval
+                    Log.e("TAG", "Failed to get data: ${error.message}")
+                }
+            })
+    }
+
+
+    //function to display progress bar
     private fun showProgress(){
         diaog = Dialog(this@MainActivity)
         diaog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -265,17 +418,18 @@ class MainActivity : AppCompatActivity() {
         diaog.setCanceledOnTouchOutside(false)
         diaog.show()
     }
+
+    //function to hide progressbar
     private fun hideProgress(){
         diaog.dismiss()
     }
 
     companion object{
+        //method google user
         const val RC_SIGN_IN = 1001
-        var EXTRA_NAME = "EXTRA_NAME"
-        var USER_ID = "USER_ID"
-        var USER_PHOTO = "USER_PHOTO"
-        var METHOD = "METHOD"
+
+        //companion object for Google userID
         var USID = "UIDS"
-        const val UID = "UID"
+
     }
 }

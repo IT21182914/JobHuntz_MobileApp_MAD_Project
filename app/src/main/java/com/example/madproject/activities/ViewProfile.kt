@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.madproject.R
 import com.example.madproject.models.UserModel
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +24,7 @@ class ViewProfile : AppCompatActivity() {
     private lateinit var emailFiled : TextView
     private lateinit var phoneFiled : TextView
     private lateinit var bioFiled : TextView
+    private lateinit var userProfilePhoto : ImageView
 
     private lateinit var mailTitle : TextView
     private lateinit var phoneTitle : TextView
@@ -35,11 +38,36 @@ class ViewProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_view_profile)
+
+        //getting details from shared preference
+        val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+        val userNid = sp.getString("userId", "")
+        val userName = sp.getString("userName", "")
+        val userImage = sp.getString("userImage", "")
+        val userPhone = sp.getString("userPhoto", "")
+        val userBio = sp.getString("userBio", "")
+        val userEmail = sp.getString("userEmail", "")
+
+        val isLogIn = sp.getBoolean("isLoggedIn", false)
+        val loggedInUser = sp.getString("loggedInUser", "")
+        val userRefID = sp.getString("refId", "")
+        val googleUserId = sp.getString("googleUserID", "")
+
+
+        Log.d(
+            "TAGD", "Log activity " +
+                    "\n$userNid and " +
+                    "\n$userName $userImage" +
+                    "\n$userPhone" +
+                    "\n$userBio" +
+                    "\n$userEmail"
+        )
 
         editBtn = findViewById(R.id.editDetails)
         deleteBtn = findViewById(R.id.deleteDetails)
+        userProfilePhoto = findViewById(R.id.profile_image2)
 
         nameFiled = findViewById(R.id.nameFeild)
         emailFiled = findViewById(R.id.emailFeild)
@@ -49,19 +77,26 @@ class ViewProfile : AppCompatActivity() {
         mailTitle = findViewById(R.id.emailTitle)
         phoneTitle = findViewById(R.id.phoneTitle)
 
-        if (intent.getStringExtra("USER") == "GOOGLE_USER") {
+        //setting user image
 
-            name = intent.getStringExtra("NAME")!!
+        Glide.with(this)
+            .load(userImage)
+            .into(userProfilePhoto)
+
+
+        if (loggedInUser == "GOOGLE_USER") {
+
+            if (userName != null) {
+                name = userName
+            }
             Log.d("TAG", "name in Vp : $name")
-            bio = intent.getStringExtra("BIO")!!
+
+            if (userBio != null) {
+                bio = userBio
+            }
             Log.d("TAG", "bio in Vp : $bio")
 
-            val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-
-            val userNid = sp.getString("userId", "")
-            val userName = sp.getString("userName", "")
-
-            nameFiled.text = userName
+            nameFiled.text = name
             bioFiled.text = bio
 
             phoneFiled.visibility = View.GONE
@@ -73,49 +108,31 @@ class ViewProfile : AppCompatActivity() {
             editBtn.setOnClickListener {
 
                 val intent = Intent(applicationContext, EditProfileDetails::class.java)
-
-                intent.putExtra("NAME", name)
-                intent.putExtra("BIO", bio)
-                intent.putExtra("ID", intent.getStringExtra("ID"))
-                intent.putExtra("USER", "GOOGLE_USER")
                 startActivity(intent)
             }
             deleteBtn.setOnClickListener{
-                val refid = intent.getStringExtra("REFID")
-                Log.d("TAG", "INTENT USERID : $refid")
 
                 val intent = Intent(applicationContext, RemoveAccount::class.java)
-                intent.putExtra("REFID", refid)
-                intent.putExtra("USER", "GOOGLE_USER")
                 startActivity(intent)
+
             }
 
-        } else {
+        } else if(loggedInUser =="FIREBASE_USER") {
 
-            var rerfID = ""
+            if (!isLogIn) {
 
-            // Check if user is logged in
-            val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-            if (!sharedPreferences.getBoolean("isLoggedIn", false)) {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
 
             } else {
-                // User is logged in, retrieve user's session data
-                val userId = sharedPreferences.getString("userId", "")
-                val userName = sharedPreferences.getString("userName", "")
-
-                if (userId != null) {
-                    rerfID = userId
-                }
-
-                Log.d("TAG", "USERID SHARED : $userId")
+                Log.d("TAG", "USERID SHARED : $userNid")
                 Log.d("TAG", "USER NAME SHARED : $userName")
-                // Do something with user's session data
             }
 
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data")
 
-            val userTempID: String = MainActivity.USER_ID
+            val userTempID: String = userNid.toString()
 
             ref.child(userTempID).get().addOnSuccessListener { dataSnapshot ->
 
@@ -144,15 +161,16 @@ class ViewProfile : AppCompatActivity() {
                             intent.putExtra("BIO", bio)
                             intent.putExtra("PHONE", phone)
                             intent.putExtra("EMAIL", email)
-                            intent.putExtra("USER", "NORMAL_USER")
 
                             startActivity(intent)
                         }
                         deleteBtn.setOnClickListener{
+
                             val intent = Intent(applicationContext, RemoveAccount::class.java)
                             intent.putExtra("USERID",userID )
-                            intent.putExtra("REFID", rerfID)
+                            intent.putExtra("REFID", userNid)
                             startActivity(intent)
+
                         }
                     }
 

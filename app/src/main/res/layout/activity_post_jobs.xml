@@ -10,9 +10,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
-        android:layout_width="357dp"
-        android:layout_height="334dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,8 +24,6 @@
             android:id="@+id/constraintLayout5"
             android:layout_width="353dp"
             android:layout_height="329dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="3dp"
             android:background="@drawable/emp_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,24 +33,20 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="@dimen/profileDp"
-                android:layout_height="@dimen/profileDPH"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="3dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/noDesc"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/circles" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewProfile"
                 android:layout_width="184dp"
                 android:layout_height="163dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="24dp"
                 android:contentDescription="@string/noDesc"
                 android:cropToPadding="true"
                 android:outlineProvider="paddedBounds"
@@ -61,19 +57,35 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="331dp"
-                android:layout_height="68dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/profileName"
+                android:id="@+id/name"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/emp_name"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/Profiletxt"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewProfile"
+                app:layout_constraintStart_toStartOf="@+id/imageViewProfile"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewProfile"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/bio"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/name"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/Profiletxt"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/name"
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name"
                 tools:ignore="MissingConstraints,TextSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
