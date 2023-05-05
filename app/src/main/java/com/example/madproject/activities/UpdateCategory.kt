@@ -39,6 +39,7 @@ class UpdateCategory: AppCompatActivity() {
                 updateCategory()
             }
         }
+        //set on clicklistner to cancel button
         cancelBtn.setOnClickListener{
             val intent = Intent(this@UpdateCategory, CategoryMain::class.java)
             startActivity(intent)

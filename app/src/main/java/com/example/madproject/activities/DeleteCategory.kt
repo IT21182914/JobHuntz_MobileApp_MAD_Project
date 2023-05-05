@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class DeleteCategory : AppCompatActivity(){
+    //declare the components
     private lateinit var deleteBtn : Button
     private lateinit var cancelBtn : Button
     private lateinit var dbRef : DatabaseReference
@@ -19,9 +20,12 @@ class DeleteCategory : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.delete_category)
 
+
+//inizialize the components
         deleteBtn = findViewById(R.id.deleteDBtn)
         cancelBtn = findViewById(R.id.canceldBtn)
 
+        //set on clicklistner to delete btn
         deleteBtn.setOnClickListener{
             val id = intent.getStringExtra("categoryID").toString()
             dbRef = FirebaseDatabase.getInstance().getReference("category")
@@ -35,6 +39,7 @@ class DeleteCategory : AppCompatActivity(){
                     Log.e("err", "error : ${err.message}")
                 }
         }
+       //set on click listner to cancel button
         cancelBtn.setOnClickListener{
             val intent = Intent(this@DeleteCategory, CategoryMain::class.java)
             startActivity(intent)

@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class CreateCategories: AppCompatActivity() {
+    //Declaration the components
     private lateinit var cancel: Button
     private lateinit var addBtn : Button
     private lateinit var categoryField : EditText
@@ -21,16 +22,18 @@ class CreateCategories: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create)
-
+//initializing the components
         cancel = findViewById(R.id.cancelBtn)
         addBtn = findViewById(R.id.addBtn)
         categoryField = findViewById(R.id.categoryFeild)
 
+        //set on click listner to cancel
         cancel.setOnClickListener{
             val intent = Intent(this@CreateCategories, CategoryMain::class.java)
             finish()
             startActivity(intent)
         }
+        //set on click listner to add button
         addBtn.setOnClickListener{
             validateAndPush()
         }
