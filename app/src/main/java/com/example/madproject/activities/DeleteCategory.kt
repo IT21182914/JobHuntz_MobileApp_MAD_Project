@@ -30,14 +30,15 @@ class DeleteCategory : AppCompatActivity(){
                     Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_LONG).show()
                     val intent = Intent(this@DeleteCategory, CategoryMain::class.java)
                     startActivity(intent)
+                    finish()
                 }.addOnFailureListener{err ->
                     Log.e("err", "error : ${err.message}")
                 }
         }
         cancelBtn.setOnClickListener{
             val intent = Intent(this@DeleteCategory, CategoryMain::class.java)
-            finish()
             startActivity(intent)
+            finish()
         }
 
     }

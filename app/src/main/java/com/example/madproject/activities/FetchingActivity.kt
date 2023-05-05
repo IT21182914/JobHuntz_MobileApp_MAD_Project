@@ -10,13 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madproject.adapteres.ListAdapter
 import com.example.madproject.models.ListModel
-import com.google.firebase.database.*
 import com.example.madproject.R
+import com.google.firebase.database.*
 
-    class FetchingActivity : AppCompatActivity() {
-
-
-    //initialize recyclerView
+class FetchingActivity : AppCompatActivity() {
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
@@ -26,7 +23,6 @@ import com.example.madproject.R
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetching)
 
-
         listRecyclerView = findViewById(R.id.rvList)
         listRecyclerView.layoutManager = LinearLayoutManager(this)
         listRecyclerView.setHasFixedSize(true)
@@ -34,14 +30,10 @@ import com.example.madproject.R
 
         listingList = arrayListOf<ListModel>()
 
-
-        //calling getListingData method
         getListingsData()
 
     }
 
-
-        //getListingsData method
     private fun getListingsData() {
 
         listRecyclerView.visibility = View.GONE
