@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class UpdateCategory: AppCompatActivity() {
+    //declaration the components
     private lateinit var updateBtn: Button
     private lateinit var cancelBtn : Button
     private lateinit var updateField : TextView
@@ -21,6 +22,7 @@ class UpdateCategory: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update)
 
+        //inizialize the components
         updateBtn = findViewById(R.id.updateCategoy)
         cancelBtn = findViewById(R.id.cancelUBrn)
         updateField = findViewById(R.id.ucategoryName)
@@ -28,7 +30,7 @@ class UpdateCategory: AppCompatActivity() {
 
 
         updateField.text = intent.getStringExtra("categoryName").toString()
-
+//set on clickner to update button
         updateBtn.setOnClickListener{
             if (updateField.text.isEmpty()){
                 updateField.error = "This field must be entered"
