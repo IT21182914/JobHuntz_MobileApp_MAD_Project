@@ -11,19 +11,22 @@ import com.example.madproject.R
 import com.google.firebase.database.FirebaseDatabase
 
 class DeletePost : AppCompatActivity() {
-
+    //declaring components
     private lateinit var deletePBtn : Button
     private lateinit var cancelPBtn :Button
 
+
+    //create function
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.delete)
 
+        // initializing variables
         deletePBtn = findViewById(R.id.deletepBtn)
         cancelPBtn = findViewById(R.id.cancelpBtn)
 
-
+        //set on click listener to delete button
         deletePBtn.setOnClickListener{
             val dbRef = FirebaseDatabase.getInstance().getReference("post")
             val ref = dbRef.child(intent.getStringExtra("PostID")!!)
