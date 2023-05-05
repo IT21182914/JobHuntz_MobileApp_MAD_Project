@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.madproject.R
 import com.google.firebase.database.FirebaseDatabase
+
+//declaring components
 class UpdateVacancy : AppCompatActivity() {
 
     private lateinit var title : TextView
@@ -15,6 +17,8 @@ class UpdateVacancy : AppCompatActivity() {
     private lateinit var update : Button
     private lateinit var cancel : Button
 
+
+    //initialize components
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_vacancy)
@@ -59,6 +63,8 @@ class UpdateVacancy : AppCompatActivity() {
 
     }
 
+
+    //creating function to view
     private fun initView() {
         title = findViewById(R.id.titleName)
         desc = findViewById(R.id.descBox)
