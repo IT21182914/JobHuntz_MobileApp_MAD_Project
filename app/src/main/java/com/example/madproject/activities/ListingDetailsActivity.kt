@@ -138,7 +138,7 @@ class ListingDetailsActivity : AppCompatActivity() {
             //message for details update
             Toast.makeText(applicationContext, "Listing Data Updated", Toast.LENGTH_LONG).show()
 
-            //we are setting updated data to our textviews
+            //we are setting updated data to our textViews
             tvJobName.text = jobName.text.toString()
             tvJobSalary.text = jobSalary.text.toString()
             tvJobDes.text = jobDes.text.toString()
