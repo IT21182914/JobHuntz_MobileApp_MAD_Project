@@ -124,7 +124,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_SHORT).show()
                 hideProgress()
                 val intent = Intent(this@ChangeProfilePhoto, Dashboard::class.java)
-                    intent.putExtra("METHOD", meth)
+                intent.putExtra("METHOD", meth)
                 startActivity(intent)
 
             }.addOnFailureListener{

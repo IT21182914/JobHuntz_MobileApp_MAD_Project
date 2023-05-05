@@ -1,5 +1,6 @@
 package com.example.madproject.activities
 
+
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +9,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.example.madproject.R
-import com.example.madproject.activities.MainActivity.Companion.UID
-import com.example.madproject.activities.MainActivity.Companion.USER_ID
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -17,12 +16,38 @@ class RemoveAccount : AppCompatActivity() {
     private lateinit var removeBtn : Button
     private lateinit var cancelBtn : Button
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_remove_account)
 
-        val id =  intent.getStringExtra("REFID")
-        Log.d("TAG", "this is ref id$id")
+
+        //getting details from shared preference
+        val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+        val userNid = sp.getString("userId", "")
+        val userName = sp.getString("userName", "")
+        val userImage = sp.getString("userImage", "")
+        val userPhone = sp.getString("userPhoto", "")
+        val userBio = sp.getString("userBio", "")
+        val userEmail = sp.getString("userEmail", "")
+
+        val isLogIn = sp.getBoolean("isLoggedIn", false)
+        val loggedInUser = sp.getString("loggedInUser", "")
+        val userRefID = sp.getString("refId", "")
+        val googleUserId = sp.getString("googleUserID", "")
+
+
+        Log.d(
+            "TAGD", "Log activity " +
+                    "\n$userNid and " +
+                    "\n$userName $userImage" +
+                    "\n$userPhone" +
+                    "\n$userBio" +
+                    "\n$userEmail"
+        )
+        Log.d("TAG", "this is ref id$userNid")
 
         removeBtn = findViewById(R.id.rmvBtn)
         cancelBtn =findViewById(R.id.cnslBtn)
@@ -30,7 +55,8 @@ class RemoveAccount : AppCompatActivity() {
         removeBtn.setOnClickListener{
 
             val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("data/${id}")
+            val myRef = database.getReference("data/$userNid")
+            Log.d("TAG", "USER REMOVE ID : $userNid")
 
             myRef.removeValue().addOnSuccessListener {
                Log.d("TAG", "DELETED successfully")
@@ -40,8 +66,8 @@ class RemoveAccount : AppCompatActivity() {
 
                 Toast.makeText(applicationContext,"Logged out", Toast.LENGTH_SHORT).show()
                 val intent = Intent(applicationContext, MainActivity::class.java)
-                finish()
                 startActivity(intent)
+                finish()
 
             }.addOnFailureListener {
                 it.message?.let { it1 -> Log.d("TAG", it1) }
@@ -50,29 +76,11 @@ class RemoveAccount : AppCompatActivity() {
         }
 
         cancelBtn.setOnClickListener{
-            val name = "intent.getStringExtra(MainActivity.EXTRA_NAME)"
-
-            val mode = intent.getStringExtra("USER")
-
             val intent = Intent(applicationContext, Dashboard::class.java)
-
-            if(mode == "GOOGLE_USER"){
-                intent.putExtra("METHOD", 1001)
-                intent.putExtra(USER_ID, MainActivity.USID)
-            }else{
-
-                // Check if user is logged in
-                val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-                    val userName = sharedPreferences.getString("userName", "")
-
-                    intent.putExtra("EXTRA_NAME",userName)
-                    intent.putExtra("METHOD", 1002)
-                    intent.putExtra(UID, USER_ID)
-            }
-            finish()
             startActivity(intent)
+            finish()
         }
 
-        Log.d("TAG", "THIS IS REF FROM REMOVE $id")
+        Log.d("TAG", "THIS IS REF FROM REMOVE $userNid")
     }
 }

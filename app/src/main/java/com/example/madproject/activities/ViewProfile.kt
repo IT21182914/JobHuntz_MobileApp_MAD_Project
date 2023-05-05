@@ -50,7 +50,8 @@ class ViewProfile : AppCompatActivity() {
         val userBio = sp.getString("userBio", "")
         val userEmail = sp.getString("userEmail", "")
 
-
+        val isLogIn = sp.getBoolean("isLoggedIn", false)
+        val loggedInUser = sp.getString("loggedInUser", "")
         val userRefID = sp.getString("refId", "")
         val googleUserId = sp.getString("googleUserID", "")
 
@@ -83,7 +84,7 @@ class ViewProfile : AppCompatActivity() {
             .into(userProfilePhoto)
 
 
-        if (intent.getStringExtra("USER") == "GOOGLE_USER") {
+        if (loggedInUser == "GOOGLE_USER") {
 
             if (userName != null) {
                 name = userName
@@ -95,7 +96,7 @@ class ViewProfile : AppCompatActivity() {
             }
             Log.d("TAG", "bio in Vp : $bio")
 
-            nameFiled.text = userName
+            nameFiled.text = name
             bioFiled.text = bio
 
             phoneFiled.visibility = View.GONE
@@ -106,55 +107,32 @@ class ViewProfile : AppCompatActivity() {
 
             editBtn.setOnClickListener {
 
-                val iDUser = intent.getStringExtra("ID")
-
                 val intent = Intent(applicationContext, EditProfileDetails::class.java)
-
-                intent.putExtra("NAME", name)
-                intent.putExtra("BIO", bio)
-                intent.putExtra("ID", iDUser)
-                intent.putExtra("USER", "GOOGLE_USER")
-
                 startActivity(intent)
             }
             deleteBtn.setOnClickListener{
 
-                val refid = intent.getStringExtra("REFID")
-
-                Log.d("TAG", "INTENT USERID : $refid")
-
                 val intent = Intent(applicationContext, RemoveAccount::class.java)
-                intent.putExtra("REFID", refid)
-                intent.putExtra("USER", "GOOGLE_USER")
                 startActivity(intent)
+
             }
 
-        } else {
+        } else if(loggedInUser =="FIREBASE_USER") {
 
-            var rerfID = ""
+            if (!isLogIn) {
 
-            // Check if user is logged in
-            val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-            if (!sharedPreferences.getBoolean("isLoggedIn", false)) {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
 
             } else {
-                // User is logged in, retrieve user's session data
-                val userId = sharedPreferences.getString("userId", "")
-                val userName = sharedPreferences.getString("userName", "")
-
-                if (userId != null) {
-                    rerfID = userId
-                }
-
-                Log.d("TAG", "USERID SHARED : $userId")
+                Log.d("TAG", "USERID SHARED : $userNid")
                 Log.d("TAG", "USER NAME SHARED : $userName")
-                // Do something with user's session data
             }
 
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data")
 
-            val userTempID: String = MainActivity.USER_ID
+            val userTempID: String = userNid.toString()
 
             ref.child(userTempID).get().addOnSuccessListener { dataSnapshot ->
 
@@ -183,15 +161,16 @@ class ViewProfile : AppCompatActivity() {
                             intent.putExtra("BIO", bio)
                             intent.putExtra("PHONE", phone)
                             intent.putExtra("EMAIL", email)
-                            intent.putExtra("USER", "NORMAL_USER")
 
                             startActivity(intent)
                         }
                         deleteBtn.setOnClickListener{
+
                             val intent = Intent(applicationContext, RemoveAccount::class.java)
                             intent.putExtra("USERID",userID )
-                            intent.putExtra("REFID", rerfID)
+                            intent.putExtra("REFID", userNid)
                             startActivity(intent)
+
                         }
                     }
 

@@ -11,7 +11,7 @@ import android.graphics.Color
 import android.os.Build
 import com.example.madproject.R
 
-class NotificationConfig {
+class NotificationConfig (){
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
@@ -21,7 +21,7 @@ class NotificationConfig {
     
 
 
-     fun notifyHere( context : Context) {
+     fun notifyHere( context : Context,title1:String, description1:String) {
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -38,16 +38,16 @@ class NotificationConfig {
             notificationManager.createNotificationChannel(notificationChannel)
 
             builder = Notification.Builder(context,channelId)
-                .setContentTitle("Example-android-notify")
-                .setContentText("Test Notification")
+                .setContentTitle(title1)
+                .setContentText(description1)
                 .setSmallIcon(R.drawable.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher))
                 .setContentIntent(pendingIntent)
 
         }else{
             builder = Notification.Builder(context)
-                .setContentTitle("Example-android-notify")
-                .setContentText("Test Notification")
+                .setContentTitle(title1)
+                .setContentText(description1)
                 .setSmallIcon(R.drawable.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher))
                 .setContentIntent(pendingIntent)
