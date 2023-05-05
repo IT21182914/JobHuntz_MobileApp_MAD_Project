@@ -97,6 +97,10 @@ class JobListForm : AppCompatActivity() {
 
             dbRef.child(listId).setValue(list)
                 .addOnCompleteListener{
+
+                    NotificationConfig.notifyObject.notifyHere(this,"New Job Added",
+                        "Newly $jobNameVar job available in DARN Job-huntZ application")
+
                     Toast.makeText(this,"Data inserted successfully",Toast.LENGTH_LONG).show()
 
                     jobName.text.clear()
@@ -104,6 +108,7 @@ class JobListForm : AppCompatActivity() {
                     jobDes.text.clear()
                     benefitJob.text.clear()
                     companyInfo.text.clear()
+
 
 
                 }.addOnFailureListener{ err ->
