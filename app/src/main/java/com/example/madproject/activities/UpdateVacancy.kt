@@ -8,8 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.madproject.R
 import com.google.firebase.database.FirebaseDatabase
-
 class UpdateVacancy : AppCompatActivity() {
+
     private lateinit var title : TextView
     private lateinit var desc : TextView
     private lateinit var update : Button
@@ -38,7 +38,7 @@ class UpdateVacancy : AppCompatActivity() {
 
             if (count==0){
 
-                val dbRef = FirebaseDatabase.getInstance().getReference("data")
+                val dbRef = FirebaseDatabase.getInstance().getReference("post")
                 val ref = dbRef.child(intent.getStringExtra("PostID")!!)
                 ref.child("companyName").setValue(name)
                 ref.child("description").setValue(description)

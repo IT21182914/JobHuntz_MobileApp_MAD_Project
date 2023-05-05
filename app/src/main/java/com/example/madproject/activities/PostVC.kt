@@ -62,7 +62,7 @@ class PostVC : AppCompatActivity() {
         }
         if (count == 0){
 
-            val dbRef = FirebaseDatabase.getInstance().getReference("data")
+            val dbRef = FirebaseDatabase.getInstance().getReference("post")
 
             val postID = dbRef.push().key!!
 
