@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ListingDetailsActivity : AppCompatActivity() {
 
-//initialize
+    // declare views
     private lateinit var tvListId: TextView
     private lateinit var tvJobName: TextView
     private lateinit var tvJobSalary: TextView
@@ -32,13 +32,17 @@ class ListingDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_listing_details)
 
 
-        //method calling
+        // call methods to initialize and set values to views
         initView()
         setValuesToViews()
 
-        //Update Button
+        // Update Button setOnClickListener
         btnUpdate.setOnClickListener {
+
+            // log the ListId for check whether it correctly passes
             Log.d("TAG","ID ${intent.getStringExtra("ListId").toString()}")
+
+            // call the method to open update dialog
             openUpdateDialog(
                 intent.getStringExtra("ListId").toString(),
                 intent.getStringExtra("JobName").toString()
@@ -46,8 +50,10 @@ class ListingDetailsActivity : AppCompatActivity() {
         }
 
 
-        //Delete Button
+        // Delete Button setOnClickListener
         btnDelete.setOnClickListener {
+
+            // call the method to delete record
             deleteRecord(
                 intent.getStringExtra("ListId").toString()
             )
@@ -57,7 +63,7 @@ class ListingDetailsActivity : AppCompatActivity() {
     }
 
 
-    //initView Method
+    // Initialize views and assign values to variables
     private fun initView(){
 
         tvListId = findViewById(R.id.tvListId)
@@ -74,7 +80,8 @@ class ListingDetailsActivity : AppCompatActivity() {
 
     }
 
-    //setValuesToViews Method
+    // Set values to views
+    // set the text of the views to the values passed by the intent
     private fun setValuesToViews(){
 
         tvListId.text = intent.getStringExtra("ListId")
@@ -89,7 +96,8 @@ class ListingDetailsActivity : AppCompatActivity() {
 
 
 
-    //openUpdateDialog Method
+    // Open update dialog
+    // create a dialog for updating the record
     private fun openUpdateDialog(
         listId: String,
         JobName: String,
@@ -98,8 +106,11 @@ class ListingDetailsActivity : AppCompatActivity() {
         val inflater = layoutInflater
         val mDialogView = inflater.inflate(R.layout.update_dialog, null)
 
+        // create the dialog
         mDialog.setView(mDialogView)
 
+
+        // get the views from the dialog
         val jobName = mDialogView.findViewById<EditText>(R.id.jobName)
         val jobSalary = mDialogView.findViewById<EditText>(R.id.jobSalary)
         val jobDes = mDialogView.findViewById<EditText>(R.id.jobDes)
