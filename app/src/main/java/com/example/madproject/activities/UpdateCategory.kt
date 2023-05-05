@@ -21,7 +21,7 @@ class UpdateCategory: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update)
 
-        updateBtn = findViewById(R.id.saveChangesBtn)
+        updateBtn = findViewById(R.id.updateCategoy)
         cancelBtn = findViewById(R.id.cancelUBrn)
         updateField = findViewById(R.id.ucategoryName)
 
@@ -40,6 +40,7 @@ class UpdateCategory: AppCompatActivity() {
         cancelBtn.setOnClickListener{
             val intent = Intent(this@UpdateCategory, CategoryMain::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -55,8 +56,8 @@ class UpdateCategory: AppCompatActivity() {
 
         Toast.makeText(this,"Updated Successfully", Toast.LENGTH_LONG).show()
         val intent = Intent(this@UpdateCategory, CategoryMain::class.java)
-        finish()
         startActivity(intent)
+        finish()
 
     }
 }

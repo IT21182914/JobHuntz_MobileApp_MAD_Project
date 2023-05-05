@@ -142,5 +142,8 @@
     <string name="adds">Add</string>
     <string name="delItem">Are you sure that you want to delete this item?</string>
     <string name="categoryIcon">Categories</string>
+    <string name="edit_icon">edit icon</string>
+    <string name="delete_icon">delete icon</string>
+    <string name="emp_name">Emp Name</string>
 
 </resources>

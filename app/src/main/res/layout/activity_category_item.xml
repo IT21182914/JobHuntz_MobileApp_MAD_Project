@@ -21,18 +21,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/tvEmpName"
-                android:layout_width="287dp"
+                android:layout_width="247dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
-                android:text="Emp Name"
+                android:text="@string/emp_name"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,14 +47,17 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/baseline_edit_24" />
+                    app:srcCompat="@drawable/baseline_edit_24"
+                    android:contentDescription="@string/edit_icon" />
 
                 <ImageView
                     android:id="@+id/deleteIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/baseline_delete_24" />
+                    app:srcCompat="@drawable/baseline_delete_24"
+                    android:contentDescription="@string/delete_icon" />
+
             </LinearLayout>
 
         </LinearLayout>

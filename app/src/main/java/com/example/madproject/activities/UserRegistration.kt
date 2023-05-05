@@ -89,7 +89,10 @@ class UserRegistration : AppCompatActivity() {
                    phone.text.clear()
                    password.text.clear()
                    rePassword.text.clear()
-                   Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
+
+                   NotificationConfig.notifyObject.notifyHere(this,"New account created", "Congratulations!! $userName You have successfully created new account in DARN Job-huntZ application")
+
+                   Toast.makeText(this, "New account successfully created", Toast.LENGTH_LONG).show()
                }.addOnFailureListener { err ->
                    Toast.makeText(this, "Error${err.message} ", Toast.LENGTH_LONG).show()
                }

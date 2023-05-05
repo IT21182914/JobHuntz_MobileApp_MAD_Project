@@ -44,9 +44,6 @@ class MainActivity : AppCompatActivity() {
     //database reference
     private lateinit var dbRef : DatabaseReference
 
-    //id
-    private lateinit var userIDs :String
-
     //dialog
     private lateinit var diaog :Dialog
 
@@ -160,39 +157,22 @@ class MainActivity : AppCompatActivity() {
                                 //Intent to dashboard
                                 val intent = Intent(applicationContext, Dashboard::class.java)
 
-                                //user id
-                                USER_ID = foundUser?.userId.toString()
-
-                                //method-normal login
-                                intent.putExtra(METHOD, 1002)
-
-                                //send name to dashboard
-                                intent.putExtra(EXTRA_NAME, foundUser?.name)
-
-                                //send user ID to dashboard (same id)
-                                intent.putExtra(UID, USER_ID)
-                                intent.putExtra("USRID", foundUser?.userId)
-
-                                //sending user image link to dashbord
-                                intent.putExtra(USER_PHOTO,foundUser?.userImage)
-
-                                //assign same user id
-                                userIDs = USER_ID
-
                                 //creating user session
                                 val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
 
                                 // Save user's session data
                                 sharedPreferences.edit().apply {
-                                    putString("userId", userIDs)
+
                                     //user details
-                                    putString("userID", foundUser?.userId)
+                                    putString("userId", foundUser?.userId)
                                     putString("userImage", foundUser?.userImage)
                                     putString("userName", foundUser?.name)
                                     putString("userBio", foundUser?.bio)
+                                    putString("userPhone", foundUser?.phone)
                                     putString("userEmail", foundUser?.email)
                                     putString("userPassword", foundUser?.password)
                                     putBoolean("isAdmin", foundUser?.isAdmin!!)
+                                    putString("loggedInUser", "FIREBASE_USER")
                                     putBoolean("isLoggedIn", true)
                                     apply()
                                 }
@@ -280,19 +260,6 @@ class MainActivity : AppCompatActivity() {
             //companion object for Google userID
             USID = user.uid
 
-            //ExtraName to send google user name
-//            intent.putExtra(EXTRA_NAME, user.displayName)
-//
-//            //method to identify user
-            intent.putExtra(METHOD, RC_SIGN_IN)
-//
-//            //google user id
-//            intent.putExtra(USER_ID, user.uid)
-//            //google userPhoto
-//            intent.putExtra(USER_PHOTO, user.photoUrl)
-
-
-            //method for validating google user
             validateGoogleUser(user.uid, user.displayName!!)
 
             //hidingProgressbar
@@ -304,8 +271,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateGoogleUser(googleID: String, googleName: String) {
 
-        //if google user id is not null
-
         //log to identify user
         Log.d("TAG", "This method is google user ID $googleID")
 
@@ -313,10 +278,14 @@ class MainActivity : AppCompatActivity() {
         val dbRef = FirebaseDatabase.getInstance()
         val ref = dbRef.getReference("data")
 
+        // creating empty variable to assign values
+        var refId  = ""
+
         //creating Google user id variable
 
         //finding user id
         ref.orderByChild("userId").equalTo(googleID)
+
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -324,123 +293,36 @@ class MainActivity : AppCompatActivity() {
                     //if user exist in firebase db
                     if (dataSnapshot.exists()) {
 
-                        // creating empty variable to assign values
-                        var name  = ""
-                        var bio  = ""
-                        var refId  = ""
-                        var userImage = ""
-
                         // Data exists, retrieve the value
                         for (Dat in dataSnapshot.children) {
 
                             //fetching data from DB
                             val userData = Dat.getValue(GoogleUser::class.java)
-
-                            //assign values to variables
-                            name = userData?.name.toString()
-                            bio = userData?.bio.toString()
-
-                            //refId to identify user (firebase ID)
                             refId = userData?.refIId.toString()
 
-                            userImage = userData?.userImage.toString()
                         }
-
-                        //create user session for google user
-                        val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-
-                        // Save user's session data
-                        sharedPreferences.edit().apply {
-                            putString("refId", refId)
-                            putString("userName", name)
-                            putString("userBio", bio)
-                            putString("userImage", userImage)
-                            putString("googleUserID", googleID)
-                            apply()
-                        }
-
-                        //if intent needs
 
                     } else {
 
                         //new google user
                         // Data does not exist, create a new user
-                        //get database reference
-                        val dbRefs = FirebaseDatabase.getInstance()
-                        val refs = dbRefs.getReference("data")
+
                         val image = "https://firebasestorage.googleapis.com/v0/b/mad-project-d6d2d.appspot.com/o/Profile%2FnewUser.png?alt=media&token=0051c3d2-aa6b-4886-9b66-7efb12a6cac3"
 
-
                         //generate firebase key
-                        val refID = refs.push().key!!
+                        val firebaseID = ref.push().key!!
 
                         val user = GoogleUser(
                             googleID,
-                            refID,
+                            firebaseID,
                             googleName,
                             "Add your bio here.",
                             image
                         )
                         //creating new user under refID
-                        refs.child(refID).setValue(user).addOnCompleteListener {
+                        ref.child(firebaseID).setValue(user).addOnCompleteListener {
 
-                            //new user created
-                            //create user session for google user
-                            //get firebase reference
-                            val dbRef = FirebaseDatabase.getInstance()
-                            val ref = dbRef.getReference("data")
-
-                            //creating Google user id variable
-
-                            //finding user id
-                            ref.orderByChild("userId").equalTo(googleID)
-                                .addListenerForSingleValueEvent(object : ValueEventListener {
-                                    override fun onDataChange(snapshot: DataSnapshot) {
-                                        //if user exist in firebase db
-                                        if (dataSnapshot.exists()) {
-                                            // creating empty variable to assign values
-                                            var name  = ""
-                                            var bio  = ""
-                                            var refId  = ""
-                                            var userImage = ""
-
-                                            // Data exists, retrieve the value
-                                            for (Dat in dataSnapshot.children) {
-
-                                                //fetching data from DB
-                                                val userData = Dat.getValue(GoogleUser::class.java)
-
-                                                //assign values to variables
-                                                name = userData?.name.toString()
-                                                bio = userData?.bio.toString()
-
-                                                //refId to identify user (firebase ID)
-                                                refId = userData?.refIId.toString()
-
-                                                userImage = userData?.userImage.toString()
-                                            }
-
-                                            //create user session for google user
-                                            val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-
-                                            // Save user's session data
-                                            sharedPreferences.edit().apply {
-                                                putString("refId", refId)
-                                                putString("userName", name)
-                                                putString("userBio", bio)
-                                                putString("userImage", userImage)
-                                                putString("googleUserID", googleID)
-                                                apply()
-                                            }
-
-                                        }
-                                    }
-
-                                    override fun onCancelled(error: DatabaseError) {
-                                        TODO("Not yet implemented")
-                                    }
-
-                                })
+                            refId = firebaseID
 
                         }.addOnFailureListener { err ->
                             Toast.makeText(
@@ -452,6 +334,73 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     }
+
+                    var refCount = 0
+                    var foundUser : GoogleUser? = null
+
+                    ref.addValueEventListener(object  : ValueEventListener{
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+
+                            if(snapshot.exists()){
+
+                                for(userSnap in snapshot.children){
+
+                                    val userData = userSnap.getValue(GoogleUser::class.java)
+
+                                    if (userData != null) {
+
+                                        if(refId == userData.refIId.toString()){
+                                            refCount += 1
+                                            foundUser = userData
+                                        }
+                                    }
+                                }
+                                if(refCount > 0){
+
+                                    //creating user session
+                                    val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+                                    // Save user's session data
+                                    sharedPreferences.edit().apply {
+
+                                        //user details
+                                        putString("userId", foundUser?.refIId)
+                                        putString("userImage", foundUser?.userImage)
+                                        putString("userName", foundUser?.name)
+                                        putString("userBio", foundUser?.bio)
+                                        putString("googleID", foundUser?.userId)
+                                        putString("loggedInUser", "GOOGLE_USER")
+                                        putBoolean("isLoggedIn", true)
+                                        apply()
+                                    }
+
+
+                                    //toast message to success full login
+                                    Toast.makeText(applicationContext,"Successfully logged in", Toast.LENGTH_SHORT).show()
+
+                                    //Intent to dashboard
+                                    val intent = Intent(applicationContext, Dashboard::class.java)
+
+                                    //hidingProgressbar
+                                    hideProgress()
+                                    // Start Dashboard
+                                    startActivity(intent)
+
+                                }else{
+                                    Toast.makeText(this@MainActivity, "Try again later", Toast.LENGTH_SHORT).show()
+                                    //hidingProgressbar
+                                    hideProgress()
+                                }
+                                Log.d(TAG, "loadUserData()details $foundUser")
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+
+
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // Handle any errors that may occur during the retrieval
@@ -478,19 +427,6 @@ class MainActivity : AppCompatActivity() {
     companion object{
         //method google user
         const val RC_SIGN_IN = 1001
-
-        //name google user
-        var EXTRA_NAME = "EXTRA_NAME"
-
-        //id normal user
-        var USER_ID = "USER_ID"
-        const val UID = "UID"
-
-        //google user photo
-        var USER_PHOTO = "USER_PHOTO"
-
-        //method
-        var METHOD = "METHOD"
 
         //companion object for Google userID
         var USID = "UIDS"
