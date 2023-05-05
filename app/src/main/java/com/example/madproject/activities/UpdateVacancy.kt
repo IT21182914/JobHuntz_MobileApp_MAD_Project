@@ -72,6 +72,8 @@ class UpdateVacancy : AppCompatActivity() {
         cancel = findViewById(R.id.cancelRBtn)
     }
 
+
+    //creating function to view
     private fun setValuesToViews(){
         title.text = intent.getStringExtra("companyName")
         desc.text = intent.getStringExtra("description")
