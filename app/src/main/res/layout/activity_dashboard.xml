@@ -7,17 +7,41 @@
     android:background="@drawable/background1"
     tools:context=".activities.Dashboard">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dashboard_padding"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="64dp">
+
+        <ImageView
+            android:id="@+id/notifications"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/no_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/notification" />
+
+        <ImageButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/logout"
+            android:contentDescription="@string/no_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -212,6 +236,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/categories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -224,7 +249,7 @@
                         android:padding="@dimen/dashboard_padding">
 
                         <ImageView
-                            android:id="@+id/notifications"
+                            android:id="@+id/imageView4"
                             android:layout_width="@dimen/dashboard_width"
                             android:layout_height="@dimen/dashboard_height"
                             android:layout_marginStart="1dp"
@@ -235,19 +260,23 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.2"
-                            app:srcCompat="@drawable/notification" />
+                            app:srcCompat="@drawable/category"
+
+                            />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/notification_txt"
+                        android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="@string/notification"
+                        android:text="@string/categoryIcon"
                         android:textAlignment="center"
                         android:textSize="@dimen/Rest_font" />
+
                 </LinearLayout>
+
             </TableRow>
 
         </TableLayout>

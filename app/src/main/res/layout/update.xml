@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1">
 
     <Button
-        android:id="@+id/updateBtn"
+        android:id="@+id/updateCategoy"
         android:layout_width="0dp"
         android:layout_height="@dimen/add_height"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="130dp"
+        android:layout_marginEnd="60dp"
         android:backgroundTint="#3471EB"
         android:text="@string/update"
         android:textSize="@dimen/btnTxt"
@@ -47,20 +46,21 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/cancelUBrn"
         android:layout_width="0dp"
         android:layout_height="@dimen/cancel_height"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="34dp"
-        android:layout_marginEnd="130dp"
+        android:layout_marginEnd="60dp"
         android:backgroundTint="#71E4DA"
         android:text="@string/cancel"
         android:textColor="#232323"
         android:textSize="@dimen/btnTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/updateCategoy" />
 </androidx.constraintlayout.widget.ConstraintLayout>

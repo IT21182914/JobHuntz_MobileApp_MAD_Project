@@ -40,9 +40,14 @@ class Notifications : AppCompatActivity() {
 
         tvLoadingData = findViewById(R.id.tvLoadingData)
 
+        val meth = intent.getIntExtra("METHOD",1)
+
+        Log.d("METH", "$meth")
+
         backBtn.setOnClickListener {
-            val intent = Intent(this, Dashboard::class.java)
-            finish()
+
+            val intent = Intent(this@Notifications, Dashboard::class.java)
+            intent.putExtra("METHOD", meth)
             startActivity(intent)
         }
 
