@@ -7,6 +7,9 @@
     android:background="@drawable/background1"
     tools:context=".activities.JobListForm">
 
+
+
+    <!-- Add Form Fields-->
     <EditText
         android:id="@+id/jobName"
         android:layout_width="wrap_content"
@@ -104,6 +107,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.83" />
 
+
+<!--    List Button-->
     <Button
         android:id="@+id/btnList"
         android:layout_width="160dp"
