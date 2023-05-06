@@ -38,7 +38,7 @@ class CreateCategories: AppCompatActivity() {
             validateAndPush()
         }
     }
-
+//validate and push method
     private fun validateAndPush() {
         val cateName = categoryField.text.toString()
 
