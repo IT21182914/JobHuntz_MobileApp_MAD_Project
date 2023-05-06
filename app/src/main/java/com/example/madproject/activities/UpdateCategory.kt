@@ -22,7 +22,7 @@ class UpdateCategory: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update)
 
-        //inizialize the components
+        //initialize the components
         updateBtn = findViewById(R.id.updateCategoy)
         cancelBtn = findViewById(R.id.cancelUBrn)
         updateField = findViewById(R.id.ucategoryName)
@@ -30,7 +30,8 @@ class UpdateCategory: AppCompatActivity() {
 
 
         updateField.text = intent.getStringExtra("categoryName").toString()
-//set on clickner to update button
+
+        //set on clickner to update button
         updateBtn.setOnClickListener{
             if (updateField.text.isEmpty()){
                 updateField.error = "This field must be entered"

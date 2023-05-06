@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/regUserPassword"
+        android:id="@+id/oldPassword"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="70dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/new_pass"
+        android:id="@+id/newPassword"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="30dp"
@@ -54,10 +54,10 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/oldPassword" />
 
     <EditText
-        android:id="@+id/regUserRePassword"
+        android:id="@+id/confirmPassword"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="30dp"
@@ -71,10 +71,10 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/newPassword" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/updatePasswordBtn"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="60dp"
@@ -85,10 +85,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserRePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button6"
+        android:id="@+id/cancelPasswordBtn"
         android:layout_width="@dimen/cancelBtn"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="20dp"
@@ -99,7 +99,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintTop_toBottomOf="@+id/updatePasswordBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
