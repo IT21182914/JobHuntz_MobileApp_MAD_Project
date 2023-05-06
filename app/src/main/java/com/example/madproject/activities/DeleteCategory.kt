@@ -23,7 +23,7 @@ class DeleteCategory : AppCompatActivity(){
 //inizialize the components
         deleteBtn = findViewById(R.id.deleteDBtn)
         cancelBtn = findViewById(R.id.canceldBtn)
-//set on click listner to delete btn
+        //set on clicklistner to delete btn
         deleteBtn.setOnClickListener{
             val id = intent.getStringExtra("categoryID").toString()
             dbRef = FirebaseDatabase.getInstance().getReference("category")
