@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class CreateCategories: AppCompatActivity() {
-    //Declaration the components
+    //daclere the components
     private lateinit var cancel: Button
     private lateinit var addBtn : Button
     private lateinit var categoryField : EditText
