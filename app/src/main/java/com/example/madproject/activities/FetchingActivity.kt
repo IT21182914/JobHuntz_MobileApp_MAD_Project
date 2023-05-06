@@ -14,15 +14,21 @@ import com.example.madproject.R
 import com.google.firebase.database.*
 
 class FetchingActivity : AppCompatActivity() {
+
+    // Declare variables for the views and database reference
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
     private lateinit var dbRef: DatabaseReference
 
+
+    // Set up the activity layout and initialize the views
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetching)
 
+
+        // Get a reference to the RecyclerView in the layout
         listRecyclerView = findViewById(R.id.rvList)
         listRecyclerView.layoutManager = LinearLayoutManager(this)
         listRecyclerView.setHasFixedSize(true)
@@ -30,12 +36,19 @@ class FetchingActivity : AppCompatActivity() {
 
         listingList = arrayListOf<ListModel>()
 
+
+        // Retrieve the data from the Firebase database
         getListingsData()
 
     }
 
+
+
+    // Define the function to retrieve data from the Firebase database
     private fun getListingsData() {
 
+
+        // Hide the RecyclerView and show the "loading data" TextView
         listRecyclerView.visibility = View.GONE
         tvLoadingData.visibility = View.VISIBLE
 
@@ -50,10 +63,12 @@ class FetchingActivity : AppCompatActivity() {
                         val listData = listSnap.getValue(ListModel::class.java)
                         listingList.add(listData!!)
                     }
+
+                    // Create a new adapter with the retrieved data and set it to the RecyclerView
                     val mAdapter = ListAdapter(listingList)
                     listRecyclerView.adapter = mAdapter
 
-
+                   // Set an item click listener for the RecyclerView items
                     mAdapter.setOnItemClickListener(object : ListAdapter.OnItemClickListener{
                         override fun onItemClick(position: Int) {
                             Log.d("TAG", "listingList size: " + listingList.size)

@@ -12,7 +12,7 @@
         android:id="@+id/btnJobAdd"
         android:layout_width="206dp"
         android:layout_height="72dp"
-        android:backgroundTint="#A280FF"
+        android:backgroundTint="#3471EB"
         android:fontFamily="sans-serif"
         android:text="Add New Job Listing"
         android:textColor="#FFFFFF"
