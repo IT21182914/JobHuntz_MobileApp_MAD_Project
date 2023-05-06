@@ -33,7 +33,7 @@ class CreateCategories: AppCompatActivity() {
             finish()
             startActivity(intent)
         }
-        //set on click listner to add button
+        //set on click listner to add btn
         addBtn.setOnClickListener{
             validateAndPush()
         }
