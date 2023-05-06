@@ -45,6 +45,7 @@ class CreateCategories: AppCompatActivity() {
         if (cateName.isEmpty()){
             categoryField.error = "This field must be entered"
         }else{
+            //add a firebase connection
             dbRef = FirebaseDatabase.getInstance().getReference("category")
             val categoryId = dbRef.push().key!!
 
