@@ -10,6 +10,8 @@ import com.example.madproject.models.PostVacancyModel
 import com.example.madproject.R
 import com.google.firebase.database.FirebaseDatabase
 
+
+//declaring components
 class PostVC : AppCompatActivity() {
 
     private lateinit var company : EditText
@@ -22,6 +24,7 @@ class PostVC : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_vc)
 
+        //initialize components
         company = findViewById(R.id.titleName)
         description = findViewById(R.id.descField)
 
@@ -46,6 +49,8 @@ class PostVC : AppCompatActivity() {
 
     }
 
+
+    //creating function to save data
     private fun saveData() {
         val name = company.text.toString()
         val desc = description.text.toString()

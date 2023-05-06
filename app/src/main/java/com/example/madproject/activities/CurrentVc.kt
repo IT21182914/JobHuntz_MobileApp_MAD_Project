@@ -18,6 +18,7 @@ import com.google.firebase.database.*
 
 class CurrentVc : AppCompatActivity() {
 
+//declaring components
     private lateinit var currentRecycle : RecyclerView
     private lateinit var tvLoadingData : TextView
 
@@ -29,6 +30,7 @@ class CurrentVc : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_current_vc)
 
+       // initializing variables
         currentRecycle = findViewById(R.id.rvId)
         backBtn = findViewById(R.id.backBtn)
 
@@ -38,16 +40,20 @@ class CurrentVc : AppCompatActivity() {
 
         tvLoadingData = findViewById(R.id.tvLoadingData)
 
+
+        //set on click listener to back button
         backBtn.setOnClickListener{
             val intent = Intent(this, PostJob::class.java)
-            finish()
             startActivity(intent)
+            finish()
         }
 
         empList = arrayListOf()
 
         getPostListData()
     }
+
+    //creating function to get post list
     private fun getPostListData() {
 
         currentRecycle.visibility = View.GONE

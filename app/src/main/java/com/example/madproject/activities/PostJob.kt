@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.madproject.R
 
+
+//declaring components
 class PostJob : AppCompatActivity() {
 
     private lateinit var current: Button
