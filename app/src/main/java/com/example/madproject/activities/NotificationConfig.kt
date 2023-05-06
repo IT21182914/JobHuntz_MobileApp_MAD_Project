@@ -18,9 +18,8 @@ class NotificationConfig (){
     private lateinit var builder: Notification.Builder
     private var channelId = "com.example.madproject.activities"
     private var description = "Test notification"
-    
 
-
+    //creating function to notify the user
      fun notifyHere( context : Context,title1:String, description1:String) {
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -30,7 +29,7 @@ class NotificationConfig (){
         val pendingIntent = PendingIntent.getActivity(context,0, intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
+            //configure the notification channel
             notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.CYAN
@@ -45,6 +44,7 @@ class NotificationConfig (){
                 .setContentIntent(pendingIntent)
 
         }else{
+            //configure the notification channel
             builder = Notification.Builder(context)
                 .setContentTitle(title1)
                 .setContentText(description1)
@@ -57,6 +57,7 @@ class NotificationConfig (){
     }
 
     companion object{
+        //creating a static object to access the function
         val notifyObject : NotificationConfig = NotificationConfig()
     }
 }
