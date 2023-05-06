@@ -11,7 +11,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.madproject.R
 import com.example.madproject.models.UserModel
@@ -115,9 +114,9 @@ class ChangeProfilePhoto : AppCompatActivity() {
         }
     }
 
+    // Function to upload data
     private fun uploadInfo(imgUrl: String) {
         UserModel( imgUrl)
-
         val idUsr = refId.toString()
 
         dtabase.child(idUsr)
@@ -135,6 +134,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
                 hideProgress()
             }
     }
+    // Function to show progress
     private fun showProgress(){
         diaog = Dialog(this@ChangeProfilePhoto)
         diaog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -142,6 +142,8 @@ class ChangeProfilePhoto : AppCompatActivity() {
         diaog.setCanceledOnTouchOutside(false)
         diaog.show()
     }
+
+    // Function to hide progress
     private fun hideProgress(){
         diaog.dismiss()
     }
