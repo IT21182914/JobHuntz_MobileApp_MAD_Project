@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class UpdateCategory: AppCompatActivity() {
-    //declaration the components
+   //declare the components
     private lateinit var updateBtn: Button
     private lateinit var cancelBtn : Button
     private lateinit var updateField : TextView
