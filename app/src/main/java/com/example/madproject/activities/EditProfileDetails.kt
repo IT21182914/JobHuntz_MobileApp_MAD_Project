@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 
 class EditProfileDetails : AppCompatActivity() {
-
+    //declaring variables
     private lateinit var edtName : TextView
     private lateinit var edtEmail : TextView
     private lateinit var edtPhone : TextView
@@ -56,7 +56,7 @@ class EditProfileDetails : AppCompatActivity() {
                     "\n$userEmail"
         )
 
-
+        //initializing variables
         edtName = findViewById(R.id.userEditName)
         edtEmail = findViewById(R.id.userEditMail)
         edtPhone = findViewById(R.id.userEditPhone)
@@ -75,27 +75,34 @@ class EditProfileDetails : AppCompatActivity() {
             edtPhone.visibility = View.GONE
             edtEmail.visibility = View.GONE
 
+            //adding click listener to update button
             updateBtn.setOnClickListener{
+
+                //if user id is not null
                 if (userNid != null) {
+
+                    //calling update details function
                     updateDetailsGu(userNid)
                     Log.d("TAG", "USERID IS $userNid")
                 }
             }
-
         }else if(loggedInUser == "FIREBASE_USER"){
+            //if user login firebase
             edtName.text = userName
             edtEmail.text = userEmail
             edtPhone.text = userPhone
             edtBio.text = userBio
 
+            //adding click listener to update button
             updateBtn.setOnClickListener{
                 if (userNid != null) {
+                    //calling update details function
                     updateDetails(userNid)
                 }
             }
         }
 
-
+        //setting click listener to cancel button
         cancelbtn.setOnClickListener{
 
             val intent = Intent(applicationContext, ViewProfile::class.java)
