@@ -35,6 +35,7 @@ class DeleteCategory : AppCompatActivity(){
                     Log.e("err", "error : ${err.message}")
                 }
         }
+        //set on click listner to cancel btn
         cancelBtn.setOnClickListener{
             val intent = Intent(this@DeleteCategory, CategoryMain::class.java)
             finish()
