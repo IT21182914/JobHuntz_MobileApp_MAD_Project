@@ -18,6 +18,7 @@ class UpdateCategory: AppCompatActivity() {
     private lateinit var updateField : TextView
     private lateinit var dbRef : DatabaseReference
 
+    //override method on create
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update)
