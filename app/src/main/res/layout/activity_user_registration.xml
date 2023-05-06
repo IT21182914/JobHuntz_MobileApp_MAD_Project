@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/regUserRePassword"
+        android:id="@+id/confirmPassword"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="24dp"
@@ -41,12 +41,12 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserPassword"
+        app:layout_constraintTop_toBottomOf="@+id/oldPassword"
         app:passwordToggleEnabled = "true"
         />
 
     <EditText
-        android:id="@+id/regUserPassword"
+        android:id="@+id/oldPassword"
         android:layout_width="@dimen/FormInputField_Width"
         android:layout_height="@dimen/FormInputField_Height"
         android:layout_marginTop="24dp"
@@ -108,7 +108,7 @@
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regUserRePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
     <TextView
         android:id="@+id/textView3"

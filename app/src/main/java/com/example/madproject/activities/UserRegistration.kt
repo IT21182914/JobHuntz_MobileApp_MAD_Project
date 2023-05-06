@@ -29,8 +29,8 @@ class UserRegistration : AppCompatActivity() {
         name = findViewById(R.id.userRegName)
         email = findViewById(R.id.userRegMail)
         phone = findViewById(R.id.userRegPhone)
-        password = findViewById(R.id.regUserPassword)
-        rePassword = findViewById(R.id.regUserRePassword)
+        password = findViewById(R.id.oldPassword)
+        rePassword = findViewById(R.id.confirmPassword)
         regBtn = findViewById(R.id.regBtn)
 
         //get database reference
@@ -53,38 +53,70 @@ class UserRegistration : AppCompatActivity() {
         val userRePassword = rePassword.text.toString()
 
         //create variable to count errors
-        var count = 0
+        var isDetailsValid = false
 
         //check if fields are empty
         if(userName.isEmpty()){
             name.error = "Please enter name"
-            count += 1
+            isDetailsValid = true
         }
+
         if(userEmail.isEmpty()){
             email.error = "Please enter email"
-            count += 1
+            isDetailsValid = true
+        }else{
+            //check if email is valid
+            if(!(emailValidation(userEmail))){
+                email.error = "Invalid email format"
+                isDetailsValid = true
+            }
         }
         if(userPhone.isEmpty()){
             phone.error = "Please enter phone number"
-            count += 1
+            isDetailsValid = true
+        }else{
+            //check if phone number is valid
+            if(!(phoneValidation(phone))){
+                phone.error = "Invalid phone number format"
+                isDetailsValid = true
+            }
         }
+
         if(userPassword.isEmpty()){
             password.error = "Please enter password"
-            count += 1
+            isDetailsValid = true
+        }else{
+            //check if password is valid
+            if (!(passwordValidation(password))){
+                password.error = "Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character (@#$%^&+=)"
+                isDetailsValid = true
+            }
         }
+
         if(userRePassword.isEmpty()){
             rePassword.error = "Please enter password"
-            count += 1
+            isDetailsValid = true
+        }else{
+            //check if password is valid
+            if (!(passwordValidation(rePassword))){
+                password.error = "Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character (@#$%^&+=)"
+                isDetailsValid = true
+            }
         }
         //check if password and retype password are same
         if (userPassword != userRePassword){
             rePassword.error = "Re type password correctly"
-            count += 1
+            isDetailsValid = true
             print(userPassword)
             print(userRePassword)
         }
+        //check if password is valid
+        if (!(passwordValidation(password))){
+            isDetailsValid = false
+        }
+
         //if no errors
-       if(count == 0) {
+       if(!(isDetailsValid)) {
 
            //create new user object
            //create new user id
@@ -117,4 +149,28 @@ class UserRegistration : AppCompatActivity() {
        }
 
     }
+    //email validation function
+    private fun emailValidation(email : String) : Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    //password validation function
+    private fun passwordValidation(password: EditText): Boolean {
+        //password validation
+        val passwordPattern = Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+
+        val passwordVal = password.text.toString()
+
+        return passwordVal.matches(passwordPattern)
+    }
+    //phone number validation function
+    private fun phoneValidation(phone: EditText): Boolean {
+        //phone number validation
+        val phonePattern = Regex("^[0-9]{10}$")
+
+        val phoneVal = phone.text.toString()
+
+        return phoneVal.matches(phonePattern)
+    }
+
 }
