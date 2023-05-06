@@ -1,5 +1,7 @@
 package com.example.madproject.activities
 
+
+//importing necessary libraries
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,10 +13,12 @@ import com.example.madproject.models.ListModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
+
+//creating activity class for jobListForm
 class JobListForm : AppCompatActivity() {
 
 
-    //initialize
+    //declare elements
     private lateinit var jobName: EditText
     private lateinit var jobSalary: EditText
     private lateinit var jobDes: EditText
@@ -23,10 +27,11 @@ class JobListForm : AppCompatActivity() {
 
     private lateinit var btnListSave: Button
 
-    //database
+    //declare reference to Firebase database
     private lateinit var dbRef: DatabaseReference
 
 
+    //this method is called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_list_form)
@@ -40,6 +45,7 @@ class JobListForm : AppCompatActivity() {
         btnListSave = findViewById(R.id.btnList)
 
 
+        //get reference to the "Lists" node in Firebase database
         dbRef = FirebaseDatabase.getInstance().getReference("Lists")
 
         btnListSave.setOnClickListener{
@@ -54,7 +60,7 @@ class JobListForm : AppCompatActivity() {
     //saveListingData method
     private fun saveListingData(){
 
-    //validate form
+        //initialize count for form validation
     var count = 0
 
         //getting values
@@ -88,22 +94,33 @@ class JobListForm : AppCompatActivity() {
             count += 1
         }
 
+        //if the form is valid, save the data to the Firebase database
         if(count == 0){
 
             val listId = dbRef.push().key!!
 
-
+            //create a ListModel object with the input values
             val list = ListModel(listId,jobNameVar,jobSalaryVar,jobDesVar,benefitJobVar,companyInfoVar)
 
             dbRef.child(listId).setValue(list)
                 .addOnCompleteListener{
+
+                    NotificationConfig.notifyObject.notifyHere(this,"New Job Added",
+                        "Newly $jobNameVar job available in DARN Job-huntZ application")
+
+
+                    //show a notification and a success message
                     Toast.makeText(this,"Data inserted successfully",Toast.LENGTH_LONG).show()
 
+
+
+                    //clear the input fields
                     jobName.text.clear()
                     jobSalary.text.clear()
                     jobDes.text.clear()
                     benefitJob.text.clear()
                     companyInfo.text.clear()
+
 
 
                 }.addOnFailureListener{ err ->
