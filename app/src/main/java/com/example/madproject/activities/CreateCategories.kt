@@ -22,7 +22,7 @@ class CreateCategories: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create)
-//initializing the components
+//inizialize the components
         cancel = findViewById(R.id.cancelBtn)
         addBtn = findViewById(R.id.addBtn)
         categoryField = findViewById(R.id.categoryFeild)
