@@ -46,7 +46,7 @@ class UpdateCategory: AppCompatActivity() {
             finish()
         }
     }
-
+//create update category method
     private fun updateCategory() {
         val name = updateField.text.toString()
         val id = intent.getStringExtra("categoryID")
