@@ -19,7 +19,7 @@ class DeleteCategory : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.delete_category)
-
+//inizialize the components
         deleteBtn = findViewById(R.id.deleteDBtn)
         cancelBtn = findViewById(R.id.canceldBtn)
 
