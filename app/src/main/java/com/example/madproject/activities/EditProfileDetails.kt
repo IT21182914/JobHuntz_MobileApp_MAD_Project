@@ -111,15 +111,19 @@ class EditProfileDetails : AppCompatActivity() {
 
         }
     }
+    //function to update details
     private fun updateDetails(userNid:String) {
 
+        //getting values from text fields
         name = edtName.text.toString()
         email = edtEmail.text.toString()
         phone = edtPhone.text.toString()
         bio = edtBio.text.toString()
 
+        //declaring count variable
         var count = 0
 
+        //checking if fields are empty
         if (name.isEmpty()){
             edtName.error = "This field must be entered"
             count += 1
@@ -132,47 +136,52 @@ class EditProfileDetails : AppCompatActivity() {
             edtPhone.error = "This field must be entered"
             count += 1
         }
+        //if count is 0
         if (count == 0){
 
+            //getting instance and reference from firebase database
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data").child(userNid)
 
+            //setting values to database
             ref.child("name").setValue(name)
             ref.child("email").setValue(email)
             ref.child("phone").setValue(phone)
             ref.child("bio").setValue(bio)
 
+            //starting dashboard activity
             val intent = Intent(applicationContext, Dashboard::class.java)
             startActivity(intent)
         }
 
     }
-
+    //function to update details
     private fun updateDetailsGu(userNid:String) {
+        //getting values from text fields
         name = edtName.text.toString()
         bio = edtBio.text.toString()
 
+        //declaring count variable
         var count = 0
 
         if (name.isEmpty()){
             edtName.error = "This field must be entered"
             count += 1
         }
-
+        //if count is 0
         if (count == 0){
-
+            //getting instance and reference from firebase database
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data").child(userNid)
 
+            //setting values to database
             ref.child("name").setValue(name)
             ref.child("bio").setValue(bio)
 
+            //starting dashboard activity
             val intent = Intent(applicationContext, Dashboard::class.java)
             startActivity(intent)
             finish()
         }
-
-
-
     }
 }
