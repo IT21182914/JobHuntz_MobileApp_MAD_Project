@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//      initializing auth
+    //initializing auth
         auth = Firebase.auth
 
         //configure google sign in
@@ -220,6 +220,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
+
                 //hidingProgressbar
                 hideProgress()
             }
