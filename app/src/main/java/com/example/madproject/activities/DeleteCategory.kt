@@ -16,6 +16,7 @@ class DeleteCategory : AppCompatActivity(){
     private lateinit var cancelBtn : Button
     private lateinit var dbRef : DatabaseReference
 
+    //override oncrete method
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.delete_category)
