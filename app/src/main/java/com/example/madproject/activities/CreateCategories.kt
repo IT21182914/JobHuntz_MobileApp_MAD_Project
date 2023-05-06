@@ -56,6 +56,7 @@ class CreateCategories: AppCompatActivity() {
                     categoryField.text.clear()
                     Toast.makeText(this, "Category added successfully",Toast.LENGTH_LONG).show()
                 }.addOnFailureListener{err ->
+                    //when the category added wrong it shows error
                     Log.e("Error", "${err.message}")
                 }
 
