@@ -54,6 +54,7 @@ class UpdateCategory: AppCompatActivity() {
         Log.d("TAG", "$id")
 
         dbRef = FirebaseDatabase.getInstance().getReference("category")
+
         val ref = dbRef.child(id!!)
         Log.d("TAG", "This is $ref")
         ref.child("categoryName").setValue(name)

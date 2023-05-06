@@ -51,6 +51,7 @@ class CreateCategories: AppCompatActivity() {
             val category = CategoryModel(categoryId, cateName)
 
             dbRef.child(categoryId).setValue(category)
+                    //when the category added successfully
                 .addOnCompleteListener{
                     categoryField.text.clear()
                     Toast.makeText(this, "Category added successfully",Toast.LENGTH_LONG).show()
