@@ -96,8 +96,6 @@ class CurrentVc : AppCompatActivity() {
 
                     })
 
-
-
                     currentRecycle.visibility = View.VISIBLE
                     tvLoadingData.visibility = View.GONE
 

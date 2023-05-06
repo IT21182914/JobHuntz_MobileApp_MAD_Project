@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 //declaring components
 class UpdateVacancy : AppCompatActivity() {
-
+    //declaring components
     private lateinit var title : TextView
     private lateinit var desc : TextView
     private lateinit var update : Button

@@ -55,6 +55,7 @@ class PostVC : AppCompatActivity() {
         val name = company.text.toString()
         val desc = description.text.toString()
 
+        //check if the fields are empty
         var count = 0
 
         if (name.isEmpty()){
@@ -65,6 +66,7 @@ class PostVC : AppCompatActivity() {
             description.error = "This field must be entered"
             count += 1
         }
+        //check if the fields are empty
         if (count == 0){
 
             val dbRef = FirebaseDatabase.getInstance().getReference("post")
