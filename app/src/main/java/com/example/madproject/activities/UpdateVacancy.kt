@@ -27,8 +27,11 @@ class UpdateVacancy : AppCompatActivity() {
         setValuesToViews()
 
         update.setOnClickListener{
+            //get data from text fields
             val name = title.text.toString()
             val description = desc.text.toString()
+
+            //count variable to check whether the fields are empty
             var count =0
 
             if (name.isEmpty()){
@@ -55,6 +58,7 @@ class UpdateVacancy : AppCompatActivity() {
 
 
         }
+        //set on click listener to cancel button
         cancel.setOnClickListener{
             val intent = Intent(this@UpdateVacancy, CurrentVc::class.java)
             finish()
@@ -80,3 +84,4 @@ class UpdateVacancy : AppCompatActivity() {
     }
 
 }
+
