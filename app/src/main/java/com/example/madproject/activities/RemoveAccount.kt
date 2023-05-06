@@ -13,10 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class RemoveAccount : AppCompatActivity() {
+    //declaring variables
     private lateinit var removeBtn : Button
     private lateinit var cancelBtn : Button
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,21 +48,27 @@ class RemoveAccount : AppCompatActivity() {
         )
         Log.d("TAG", "this is ref id$userNid")
 
+        //initializing variables
         removeBtn = findViewById(R.id.rmvBtn)
         cancelBtn =findViewById(R.id.cnslBtn)
 
+        //setting onclick listener to remove button
         removeBtn.setOnClickListener{
 
+            //getting instance of firebase database
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("data/$userNid")
             Log.d("TAG", "USER REMOVE ID : $userNid")
 
+            //removing user from database
             myRef.removeValue().addOnSuccessListener {
                Log.d("TAG", "DELETED successfully")
 
+                //signing out user
                 val mAuth = FirebaseAuth.getInstance()
                 mAuth.signOut()
 
+                //setting shared preference to null
                 Toast.makeText(applicationContext,"Logged out", Toast.LENGTH_SHORT).show()
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
@@ -75,6 +80,7 @@ class RemoveAccount : AppCompatActivity() {
 
         }
 
+        //setting onclick listener to cancel button
         cancelBtn.setOnClickListener{
             val intent = Intent(applicationContext, Dashboard::class.java)
             startActivity(intent)
