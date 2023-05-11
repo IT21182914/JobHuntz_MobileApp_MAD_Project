@@ -89,6 +89,7 @@
         android:autofillHints=""
         android:background="@drawable/custom_field"
         android:ems="10"
+        android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="12"
         android:maxLines="12"

@@ -12,7 +12,10 @@ import com.example.madproject.models.CategoryModel
 class CategoryAdapter(private val empList: ArrayList<CategoryModel>) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
+
     private lateinit var mListener: onItemClickListener
+
+
 
     interface onItemClickListener{
         fun onItemClick(position: Int, mode: String)
@@ -38,6 +41,7 @@ class CategoryAdapter(private val empList: ArrayList<CategoryModel>) :
 
     class ViewHolder(itemView: View, clickListener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
+
         val tvEmpName : TextView = itemView.findViewById(R.id.tvEmpName)
         private val edtBtn : ImageView = itemView.findViewById(R.id.editIcon)
         private val delBtn : ImageView = itemView.findViewById(R.id.deleteIcon)
@@ -53,5 +57,6 @@ class CategoryAdapter(private val empList: ArrayList<CategoryModel>) :
         }
 
     }
+
 
 }
