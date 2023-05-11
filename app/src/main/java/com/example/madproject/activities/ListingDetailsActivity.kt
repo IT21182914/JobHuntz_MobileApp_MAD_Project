@@ -33,6 +33,9 @@ class ListingDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing_details)
 
+        // call methods to initialize and set values to views
+        initView()
+        setValuesToViews()
 
         //getting details from shared preference
         val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
@@ -82,9 +85,7 @@ class ListingDetailsActivity : AppCompatActivity() {
         }
 
 
-        // call methods to initialize and set values to views
-        initView()
-        setValuesToViews()
+
 
         // Update Button setOnClickListener
         btnUpdate.setOnClickListener {
