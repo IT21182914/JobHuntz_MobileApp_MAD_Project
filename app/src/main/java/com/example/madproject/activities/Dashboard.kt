@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.madproject.R
 import com.example.madproject.databinding.ActivityDashboardBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -23,6 +26,11 @@ class Dashboard : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityDashboardBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestIdToken("92401905438-ls9vedrdnei1kakq3t58gs4jlhinevk2.apps.googleusercontent.com")
+        .requestEmail()
+        .build()
 
     //getting details from shared preference
     val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
@@ -60,31 +68,35 @@ class Dashboard : AppCompatActivity() {
     if (isLogIn) {
 
         binding.logoutBtn.setOnClickListener {
-            val mAuth = FirebaseAuth.getInstance()
-            mAuth.signOut()
 
-            val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+            val auth = FirebaseAuth.getInstance()
+            val gsc = GoogleSignIn.getClient(this,gso)
 
-            editor.putBoolean("is_logged_in", false)
-            editor.putString("userID", "")
-            editor.putString("userImage", "")
-            editor.putString("userName", "")
-            editor.putString("userBio", "")
-            editor.putString("userEmail", "")
-            editor.putString("userPassword", "")
-            editor.putBoolean("isAdmin", false)
-            editor.putString("loggedInUser", "")
+            auth.signOut() // Sign out from Firebase authentication
+            gsc.signOut().addOnCompleteListener(this) {
 
-            editor.apply()
+                val sharedPreferences = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
 
-            Toast.makeText(applicationContext, "Logged out", Toast.LENGTH_SHORT).show()
+                editor.putBoolean("is_logged_in", false)
+                editor.putString("userID", "")
+                editor.putString("userImage", "")
+                editor.putString("userName", "")
+                editor.putString("userBio", "")
+                editor.putString("userEmail", "")
+                editor.putString("userPassword", "")
+                editor.putBoolean("isAdmin", false)
+                editor.putString("loggedInUser", "")
 
-            val intent = Intent(applicationContext, MainActivity::class.java)
+                editor.apply()
 
-            startActivity(intent)
+                Toast.makeText(this, "Successfully sign out", Toast.LENGTH_SHORT).show()
 
-            finish()
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish() // Close the current activity
+                }
+
         }
 
         //if login method is 1001 Google user
@@ -188,4 +200,5 @@ class Dashboard : AppCompatActivity() {
             finish()
         }
     }
+
 }
