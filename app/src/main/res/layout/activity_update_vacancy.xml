@@ -75,20 +75,21 @@
         android:layout_width="@dimen/formWidth"
         android:layout_height="@dimen/curnt_hight"
         android:layout_marginTop="20dp"
+        android:autofillHints=""
         android:background="@drawable/description_back"
-        android:padding="15dp"
-        android:text=""
         android:ems="10"
+        android:gravity="top"
         android:hint="Description"
         android:inputType="textMultiLine"
         android:lines="12"
         android:maxLines="12"
+        android:padding="15dp"
         android:scrollbars="vertical"
+        android:text=""
         android:textSize="@dimen/Text22"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descTag"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/descTag" />
 
 
     <Button

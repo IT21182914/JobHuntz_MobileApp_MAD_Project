@@ -152,6 +152,7 @@
                         android:layout_height="wrap_content"
 
                         android:layout_marginEnd="10dp"
+                        android:gravity="top"
                         android:padding="@dimen/bio_padding"
                         android:text="@string/sample_bio"
                         android:textAlignment="textStart"
