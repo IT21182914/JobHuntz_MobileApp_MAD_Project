@@ -94,11 +94,11 @@ class CategoryMain : AppCompatActivity() {
 
         empList = arrayListOf<CategoryModel>()
 
-        getEmployeesData()
+        getEmployeesData(isAdmin)
 
     }
 
-    private fun getEmployeesData() {
+    private fun getEmployeesData(isAdmin: Boolean) {
 
         empRecyclerView.visibility = View.GONE
         tvLoadingData.visibility = View.VISIBLE
@@ -121,22 +121,24 @@ class CategoryMain : AppCompatActivity() {
                     mAdapter.setOnItemClickListener(object : CategoryAdapter.onItemClickListener{
                         override fun onItemClick(position: Int, mode : String) {
 
-                            if (mode == "EDT"){
-                                val intent = Intent(this@CategoryMain, UpdateCategory::class.java)
+                            if (isAdmin){
 
-                                //put extras
-                                intent.putExtra("categoryID", empList[position].categoryId)
-                                intent.putExtra("categoryName", empList[position].categoryName)
-                                startActivity(intent)
-                            }else{
-                                val intent = Intent(this@CategoryMain, DeleteCategory::class.java)
+                                    if (mode == "EDT"){
+                                        val intent = Intent(this@CategoryMain, UpdateCategory::class.java)
 
-                                //put extras
-                                intent.putExtra("categoryID", empList[position].categoryId)
-                                intent.putExtra("categoryName", empList[position].categoryName)
-                                startActivity(intent)
+                                        //put extras
+                                        intent.putExtra("categoryID", empList[position].categoryId)
+                                        intent.putExtra("categoryName", empList[position].categoryName)
+                                        startActivity(intent)
+                                    }else{
+                                        val intent = Intent(this@CategoryMain, DeleteCategory::class.java)
+
+                                        //put extras
+                                        intent.putExtra("categoryID", empList[position].categoryId)
+                                        intent.putExtra("categoryName", empList[position].categoryName)
+                                        startActivity(intent)
+                                    }
                             }
-
                         }
 
                     })

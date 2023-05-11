@@ -1,9 +1,11 @@
 package com.example.madproject.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -30,6 +32,54 @@ class ListingDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing_details)
+
+
+        //getting details from shared preference
+        val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
+
+        val userNid = sp.getString("userId", "")
+        val userName = sp.getString("userName", "")
+        val userImage = sp.getString("userImage", "")
+        val userPhone = sp.getString("userPhone", "")
+        val userBio = sp.getString("userBio", "")
+        val userEmail = sp.getString("userEmail", "")
+        val isLogIn = sp.getBoolean("isLoggedIn", false)
+        val isAdmin = sp.getBoolean("isAdmin", false)
+
+        val loggedInUser = sp.getString("loggedInUser", "")
+        val userRefID = sp.getString("refId", "")
+        val googleUserId = sp.getString("googleUserID", "")
+
+
+        Log.d(
+            "TAGD", "Log activity " +
+                    "\n$userNid and " +
+                    "\n$userName $userImage" +
+                    "\n$userPhone" +
+                    "\n$userBio" +
+                    "\n$userEmail"
+        )
+
+        Log.d(
+            "TAGX", "This is admins status: $isAdmin"
+
+        )
+        if(isAdmin){
+            btnUpdate.visibility = View.VISIBLE
+            btnDelete.visibility = View.VISIBLE
+            Log.d(
+                "TAGX", "This is admins true"
+
+            )
+
+        }else{
+            btnUpdate.visibility = View.GONE
+            btnDelete.visibility = View.GONE
+            Log.d(
+                "TAGX", "This is adminsfalse"
+
+            )
+        }
 
 
         // call methods to initialize and set values to views

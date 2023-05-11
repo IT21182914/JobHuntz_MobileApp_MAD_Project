@@ -83,6 +83,7 @@
         android:autofillHints=""
         android:background="@drawable/description_back"
         android:ems="10"
+        android:gravity="top"
         android:hint="@string/desc"
         android:inputType="textMultiLine"
         android:lines="12"
