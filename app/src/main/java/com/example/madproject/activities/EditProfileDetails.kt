@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 
 class EditProfileDetails : AppCompatActivity() {
-
+    //declaring variables
     private lateinit var edtName : TextView
     private lateinit var edtEmail : TextView
     private lateinit var edtPhone : TextView
@@ -56,7 +56,7 @@ class EditProfileDetails : AppCompatActivity() {
                     "\n$userEmail"
         )
 
-
+        //initializing variables
         edtName = findViewById(R.id.userEditName)
         edtEmail = findViewById(R.id.userEditMail)
         edtPhone = findViewById(R.id.userEditPhone)
@@ -75,27 +75,34 @@ class EditProfileDetails : AppCompatActivity() {
             edtPhone.visibility = View.GONE
             edtEmail.visibility = View.GONE
 
+            //adding click listener to update button
             updateBtn.setOnClickListener{
+
+                //if user id is not null
                 if (userNid != null) {
+
+                    //calling update details function
                     updateDetailsGu(userNid)
                     Log.d("TAG", "USERID IS $userNid")
                 }
             }
-
         }else if(loggedInUser == "FIREBASE_USER"){
+            //if user login firebase
             edtName.text = userName
             edtEmail.text = userEmail
             edtPhone.text = userPhone
             edtBio.text = userBio
 
+            //adding click listener to update button
             updateBtn.setOnClickListener{
                 if (userNid != null) {
+                    //calling update details function
                     updateDetails(userNid)
                 }
             }
         }
 
-
+        //setting click listener to cancel button
         cancelbtn.setOnClickListener{
 
             val intent = Intent(applicationContext, ViewProfile::class.java)
@@ -104,15 +111,19 @@ class EditProfileDetails : AppCompatActivity() {
 
         }
     }
+    //function to update details
     private fun updateDetails(userNid:String) {
 
+        //getting values from text fields
         name = edtName.text.toString()
         email = edtEmail.text.toString()
         phone = edtPhone.text.toString()
         bio = edtBio.text.toString()
 
+        //declaring count variable
         var count = 0
 
+        //checking if fields are empty
         if (name.isEmpty()){
             edtName.error = "This field must be entered"
             count += 1
@@ -125,47 +136,52 @@ class EditProfileDetails : AppCompatActivity() {
             edtPhone.error = "This field must be entered"
             count += 1
         }
+        //if count is 0
         if (count == 0){
 
+            //getting instance and reference from firebase database
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data").child(userNid)
 
+            //setting values to database
             ref.child("name").setValue(name)
             ref.child("email").setValue(email)
             ref.child("phone").setValue(phone)
             ref.child("bio").setValue(bio)
 
+            //starting dashboard activity
             val intent = Intent(applicationContext, Dashboard::class.java)
             startActivity(intent)
         }
 
     }
-
+    //function to update details
     private fun updateDetailsGu(userNid:String) {
+        //getting values from text fields
         name = edtName.text.toString()
         bio = edtBio.text.toString()
 
+        //declaring count variable
         var count = 0
 
         if (name.isEmpty()){
             edtName.error = "This field must be entered"
             count += 1
         }
-
+        //if count is 0
         if (count == 0){
-
+            //getting instance and reference from firebase database
             val dbRef = FirebaseDatabase.getInstance()
             val ref = dbRef.getReference("data").child(userNid)
 
+            //setting values to database
             ref.child("name").setValue(name)
             ref.child("bio").setValue(bio)
 
+            //starting dashboard activity
             val intent = Intent(applicationContext, Dashboard::class.java)
             startActivity(intent)
             finish()
         }
-
-
-
     }
 }

@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//      initializing auth
+    //initializing auth
         auth = Firebase.auth
 
         //configure google sign in
@@ -77,18 +77,46 @@ class MainActivity : AppCompatActivity() {
 
         //add onclick listener to submit button
         submitBtn.setOnClickListener{
+
             showProgress()
-            if(userEmail.text.isEmpty()){
-                userEmail.error = "Email must be entered"
-                hideProgress()
-            }
+
+            var isDetailsValid = false
+
             if(password.text.isEmpty()){
+
                 password.error = "Password must be entered"
                 hideProgress()
+                isDetailsValid = true
+
+            }else if(!(passwordValidation(password))){
+
+                password.error = "Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character (@#$%^&+=)"
+                hideProgress()
+                isDetailsValid = true
             }
-            if (!(userEmail.text.isEmpty()  && password.text.isEmpty())){
-                //if both email and password is not empty validate those details
+
+
+            if(userEmail.text.isEmpty()){
+
+                userEmail.error = "Email must be entered"
+                hideProgress()
+                isDetailsValid = true
+
+            }else if(!(emailValidation(userEmail.text.toString()))){
+
+                userEmail.error = "Invalid email format"
+                hideProgress()
+                isDetailsValid = true
+
+            }
+
+            if (!(isDetailsValid)){
                 validateData()
+                Log.d("TAG", "onCreate: " + "Something is good")
+
+            }else{
+                Log.d("TAG", "onCreate: " + "Something went wrong")
+                hideProgress()
             }
         }
 
@@ -110,6 +138,20 @@ class MainActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    //email validation function
+    private fun emailValidation(email : String) : Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+    //password validation function
+    private fun passwordValidation(password: EditText): Boolean {
+        //password validation
+        val passwordPattern = Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+
+        val passwordVal = password.text.toString()
+
+        return passwordVal.matches(passwordPattern)
     }
 
 
@@ -220,6 +262,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
+
                 //hidingProgressbar
                 hideProgress()
             }

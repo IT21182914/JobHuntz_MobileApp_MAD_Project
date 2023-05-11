@@ -8,13 +8,13 @@
     tools:context=".activities.JobListForm">
 
 
-
     <!-- Add Form Fields-->
+
     <EditText
         android:id="@+id/jobName"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/jobname"
-        android:layout_margin="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/cornerjoblist"
         android:ems="12"
         android:hint="@string/JobName"
@@ -22,18 +22,15 @@
         android:minHeight="48dp"
         android:padding="13dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@+id/addList" />
 
     <EditText
         android:id="@+id/jobSalary"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/jobsal"
-        android:layout_margin="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/cornerjoblist"
         android:ems="12"
         android:hint="@string/Salary"
@@ -41,19 +38,16 @@
         android:minHeight="48dp"
         android:padding="13dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintTop_toBottomOf="@+id/jobName" />
 
 
     <EditText
         android:id="@+id/jobDes"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/jobdes"
-        android:layout_margin="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/cornerjoblist"
         android:ems="12"
         android:hint="@string/JobDescription"
@@ -61,19 +55,16 @@
         android:minHeight="48dp"
         android:padding="13dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
+        app:layout_constraintTop_toBottomOf="@+id/jobSalary" />
 
 
     <EditText
         android:id="@+id/benefitJob"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/jobbenefits"
-        android:layout_margin="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/cornerjoblist"
         android:ems="12"
         android:hint="@string/Benefit"
@@ -81,18 +72,15 @@
         android:minHeight="48dp"
         android:padding="13dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintTop_toBottomOf="@+id/jobDes" />
 
     <EditText
         android:id="@+id/companyInfo"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/jobcompany"
-        android:layout_margin="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/cornerjoblist"
         android:ems="12"
         android:hint="@string/Company"
@@ -100,43 +88,37 @@
         android:minHeight="48dp"
         android:padding="13dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintTop_toBottomOf="@+id/benefitJob" />
 
 
-<!--    List Button-->
+    <!--    List Button-->
     <Button
         android:id="@+id/btnList"
         android:layout_width="160dp"
         android:layout_height="55dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#D38DFF"
         android:text="List"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintTop_toBottomOf="@+id/companyInfo" />
 
     <TextView
         android:id="@+id/addList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:fontFamily="serif"
         android:text="List a new Job"
         android:textColor="#000000"
         android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

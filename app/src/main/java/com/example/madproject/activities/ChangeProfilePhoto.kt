@@ -11,7 +11,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.madproject.R
 import com.example.madproject.models.UserModel
@@ -22,6 +21,7 @@ import java.util.*
 
 class ChangeProfilePhoto : AppCompatActivity() {
 
+    // Declaring variables
     private lateinit var dtabase: DatabaseReference
     private lateinit var storage: FirebaseStorage
     private lateinit var selectedImage: Uri
@@ -40,7 +40,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
         setContentView(R.layout.activity_edit_profile_photo)
 
 
-
+        //initializing variables
         dtabase = FirebaseDatabase.getInstance().getReference("data")
         storage = FirebaseStorage.getInstance()
 
@@ -51,6 +51,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
         save = findViewById(R.id.saveBtn)
         cancel = findViewById(R.id.cancelChangesBtn)
 
+        // On click listener for edit button
         edtBtn.setOnClickListener{
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
@@ -81,6 +82,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
             .load(userImage)
             .into(currentImage)
 
+        // On click listener for save button
         save.setOnClickListener{
             if (selectedImage == null){
                 Toast.makeText(this, "Please select your Image", Toast.LENGTH_SHORT).show()
@@ -89,6 +91,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
                 saveDat()
             }
         }
+        // On click listener for cancel button
         cancel.setOnClickListener{
             val intent = Intent(this@ChangeProfilePhoto, Dashboard::class.java)
             intent.putExtra("METHOD",meth)
@@ -97,7 +100,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
 
 
     }
-
+    // Function to save data
     private fun saveDat() {
         val ref = storage.reference.child("Profile").child(Date().time.toString())
         ref.putFile(selectedImage).addOnCompleteListener{
@@ -111,9 +114,9 @@ class ChangeProfilePhoto : AppCompatActivity() {
         }
     }
 
+    // Function to upload data
     private fun uploadInfo(imgUrl: String) {
         UserModel( imgUrl)
-
         val idUsr = refId.toString()
 
         dtabase.child(idUsr)
@@ -131,6 +134,7 @@ class ChangeProfilePhoto : AppCompatActivity() {
                 hideProgress()
             }
     }
+    // Function to show progress
     private fun showProgress(){
         diaog = Dialog(this@ChangeProfilePhoto)
         diaog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -138,6 +142,8 @@ class ChangeProfilePhoto : AppCompatActivity() {
         diaog.setCanceledOnTouchOutside(false)
         diaog.show()
     }
+
+    // Function to hide progress
     private fun hideProgress(){
         diaog.dismiss()
     }

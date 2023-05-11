@@ -59,13 +59,15 @@ class CurrentVc : AppCompatActivity() {
         currentRecycle.visibility = View.GONE
 
         tvLoadingData.visibility = View.VISIBLE
-
+        //get data from database
         dbRef = FirebaseDatabase.getInstance().getReference("post")
         Log.d("TAG", "This id $dbRef")
         dbRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                //clearing the list
                 empList.clear()
+                //checking if data is available
                 if(snapshot.exists()){
                     for (empSnap in snapshot.children){
                         val postData = empSnap.getValue(PostVacancyModel::class.java)
@@ -93,8 +95,6 @@ class CurrentVc : AppCompatActivity() {
                         }
 
                     })
-
-
 
                     currentRecycle.visibility = View.VISIBLE
                     tvLoadingData.visibility = View.GONE
