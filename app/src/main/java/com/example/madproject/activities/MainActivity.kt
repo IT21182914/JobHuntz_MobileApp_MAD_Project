@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             .requestEmail()
             .build()
 
+
         gsc = GoogleSignIn.getClient(this , gso)
 
         //finding register link
@@ -135,10 +136,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //google sign in function
+
     private fun signIn() {
-        val signInIntent = gsc.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        gsc.signOut().addOnCompleteListener(this) {
+            val signInIntent = gsc.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
     }
+
 
     //email validation function
     private fun emailValidation(email : String) : Boolean{
@@ -215,7 +220,7 @@ class MainActivity : AppCompatActivity() {
                                     putString("userPassword", foundUser?.password)
                                     putBoolean("isAdmin", foundUser?.Admin!!)
                                     putString("loggedInUser", "FIREBASE_USER")
-                                    putBoolean("isLoggedIn", false)
+                                    putBoolean("isLoggedIn", true)
                                     apply()
                                 }
                                 //hidingProgressbar
@@ -414,7 +419,7 @@ class MainActivity : AppCompatActivity() {
                                         putString("userBio", foundUser?.bio)
                                         putString("googleID", foundUser?.userId)
                                         putString("loggedInUser", "GOOGLE_USER")
-                                        putBoolean("isLoggedIn", false)
+                                        putBoolean("isLoggedIn", true)
                                         apply()
                                     }
 

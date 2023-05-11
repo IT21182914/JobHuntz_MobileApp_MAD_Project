@@ -39,7 +39,7 @@ class ViewListingMain : AppCompatActivity() {
         val userPhone = sp.getString("userPhone", "")
         val userBio = sp.getString("userBio", "")
         val userEmail = sp.getString("userEmail", "")
-        val isLogIn = sp.getBoolean("isLoggedIn", false)
+        val isLogIn = sp.getBoolean("isLoggedIn", true)
         val isAdmin = sp.getBoolean("isAdmin", false)
 
         val loggedInUser = sp.getString("loggedInUser", "")
