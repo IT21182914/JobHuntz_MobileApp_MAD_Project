@@ -25,6 +25,11 @@ class ViewListingMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_listing_main)
 
+        //set path to the btnJobAdd buttons
+        btnJobAdd = findViewById(R.id.btnJobAdd)
+        //set path to the btnJobView buttons
+        btnJobView = findViewById(R.id.btnJobView)
+
         //getting details from shared preference
         val sp = getSharedPreferences("userSession", Context.MODE_PRIVATE)
 
@@ -71,8 +76,7 @@ class ViewListingMain : AppCompatActivity() {
         }
 
 
-            //set path to the btnJobAdd buttons
-            btnJobAdd = findViewById(R.id.btnJobAdd)
+
 
               btnJobAdd.setOnClickListener{
 
@@ -82,8 +86,7 @@ class ViewListingMain : AppCompatActivity() {
               }
 
 
-            //set path to the btnJobView buttons
-            btnJobView = findViewById(R.id.btnJobView)
+
 
               btnJobView.setOnClickListener{
 

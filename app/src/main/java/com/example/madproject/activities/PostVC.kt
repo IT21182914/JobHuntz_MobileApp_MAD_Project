@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 //declaring components
 class PostVC : AppCompatActivity() {
-
+    //declaring components
     private lateinit var company : EditText
     private lateinit var description : EditText
 
@@ -32,14 +32,14 @@ class PostVC : AppCompatActivity() {
         cancel = findViewById(R.id.cancelBtn)
 
 
-
+        //set on click listener to cancel button
         cancel.setOnClickListener{
             val intent = Intent(this, PostJob::class.java)
             finish()
             startActivity(intent)
 
         }
-
+        //set on click listener to post button
         post.setOnClickListener{
             saveData()
         }
@@ -55,6 +55,7 @@ class PostVC : AppCompatActivity() {
         val name = company.text.toString()
         val desc = description.text.toString()
 
+        //check if the fields are empty
         var count = 0
 
         if (name.isEmpty()){
@@ -65,6 +66,7 @@ class PostVC : AppCompatActivity() {
             description.error = "This field must be entered"
             count += 1
         }
+        //check if the fields are empty
         if (count == 0){
 
             val dbRef = FirebaseDatabase.getInstance().getReference("post")

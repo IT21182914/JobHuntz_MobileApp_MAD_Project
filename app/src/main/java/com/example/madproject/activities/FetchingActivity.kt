@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class FetchingActivity : AppCompatActivity() {
     private lateinit var tvLoadingData: TextView
     private lateinit var listingList: ArrayList<ListModel>
     private lateinit var dbRef: DatabaseReference
+    private lateinit var searchView: SearchView
 
 
     // Set up the activity layout and initialize the views
@@ -33,6 +35,7 @@ class FetchingActivity : AppCompatActivity() {
         listRecyclerView.layoutManager = LinearLayoutManager(this)
         listRecyclerView.setHasFixedSize(true)
         tvLoadingData = findViewById(R.id.tvLoadingData)
+        searchView = findViewById(R.id.searchView)
 
         listingList = arrayListOf<ListModel>()
 
@@ -64,11 +67,44 @@ class FetchingActivity : AppCompatActivity() {
                         listingList.add(listData!!)
                     }
 
+
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String?): Boolean {
+
+                            if (newText!!.isNotEmpty()){
+                                listingList.clear()
+                                val search = newText.toLowerCase()
+                                snapshot.children.forEach {
+                                    val list = it.getValue(ListModel::class.java)
+                                    if (list!!.jobName?.toLowerCase()?.contains(search) == true){
+                                        listingList.add(list)
+                                    }
+                                }
+                                listRecyclerView.adapter!!.notifyDataSetChanged()
+                            }else{
+                                listingList.clear()
+                                snapshot.children.forEach {
+                                    val list = it.getValue(ListModel::class.java)
+                                    listingList.add(list!!)
+                                }
+                                listRecyclerView.adapter!!.notifyDataSetChanged()
+                            }
+                            return false
+                        }
+
+                    })
+
                     // Create a new adapter with the retrieved data and set it to the RecyclerView
                     val mAdapter = ListAdapter(listingList)
                     listRecyclerView.adapter = mAdapter
 
-                   // Set an item click listener for the RecyclerView items
+
+
+                    // Set an item click listener for the RecyclerView items
                     mAdapter.setOnItemClickListener(object : ListAdapter.OnItemClickListener{
                         override fun onItemClick(position: Int) {
                             Log.d("TAG", "listingList size: " + listingList.size)
