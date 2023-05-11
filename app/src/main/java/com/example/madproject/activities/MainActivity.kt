@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                                     putString("userPhone", foundUser?.phone)
                                     putString("userEmail", foundUser?.email)
                                     putString("userPassword", foundUser?.password)
-                                    putBoolean("isAdmin", foundUser?.isAdmin!!)
+                                    putBoolean("isAdmin", foundUser?.Admin!!)
                                     putString("loggedInUser", "FIREBASE_USER")
                                     putBoolean("isLoggedIn", true)
                                     apply()

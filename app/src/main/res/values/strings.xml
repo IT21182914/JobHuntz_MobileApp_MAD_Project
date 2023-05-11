@@ -145,5 +145,7 @@
     <string name="edit_icon">edit icon</string>
     <string name="delete_icon">delete icon</string>
     <string name="emp_name">Emp Name</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_content">Notification Content</string>
 
 </resources>

@@ -8,6 +8,6 @@ data class UserModel(
     var password: String? = null,
     var bio : String? = null,
     var userImage : String? = null,
-    var isAdmin : Boolean? = null
+    var Admin : Boolean? = null
 
 )
