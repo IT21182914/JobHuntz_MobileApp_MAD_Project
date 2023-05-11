@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import android.widget.RemoteViews
 import com.example.madproject.R
 
 class NotificationConfig (){
@@ -21,6 +22,11 @@ class NotificationConfig (){
 
     //creating function to notify the user
      fun notifyHere( context : Context,title1:String, description1:String) {
+        //create remote view
+        val contentView = RemoteViews(context.packageName, R.layout.notification_layout)
+        contentView.setTextViewText(R.id.notification_title, title1)
+        contentView.setTextViewText(R.id.tv_content, description1)
+
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -37,19 +43,17 @@ class NotificationConfig (){
             notificationManager.createNotificationChannel(notificationChannel)
 
             builder = Notification.Builder(context,channelId)
-                .setContentTitle(title1)
-                .setContentText(description1)
-                .setSmallIcon(R.drawable.ic_launcher_round)
-                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher))
+                .setContent(contentView)
+                .setSmallIcon(R.drawable.ic_launcher_jobp)
+                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher_jobp))
                 .setContentIntent(pendingIntent)
 
         }else{
             //configure the notification channel
             builder = Notification.Builder(context)
-                .setContentTitle(title1)
-                .setContentText(description1)
-                .setSmallIcon(R.drawable.ic_launcher_round)
-                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher))
+                .setContent(contentView)
+                .setSmallIcon(R.drawable.ic_launcher_jobp)
+                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher_jobp))
                 .setContentIntent(pendingIntent)
 
         }
