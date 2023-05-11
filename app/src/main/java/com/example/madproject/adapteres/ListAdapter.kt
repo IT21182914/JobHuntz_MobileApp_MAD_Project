@@ -51,8 +51,9 @@ class ListAdapter(private val listingList: ArrayList<ListModel>):
         return listingList.size
     }
 
-
-
+//    fun filter(newText: String?) {
+//
+//    }
 
 
     class ViewHolder(itemView: View, clickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
